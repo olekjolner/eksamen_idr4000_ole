@@ -1,0 +1,5 @@
+---
+title: "Vitenskapsfilosofi"
+bibliography: 
+  referanser/06-ref.bib
+---

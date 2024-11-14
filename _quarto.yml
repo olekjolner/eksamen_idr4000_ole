@@ -1,0 +1,38 @@
+project: 
+  render: 
+    - "*.qmd"
+    - "!devel/"
+  type: book
+book:
+  title: "Eksamen IDR4000 Ole"
+  author: "Ole-K."
+  date: "2024-11-05"
+  chapters:
+    - index.qmd
+    - 01-reliabilitet.qmd
+    - 02-regresjonsmodeller.qmd
+    - 03-statistisk-inferens.qmd
+    - 04-studiedesign.qmd
+    - 05-repeterte-målinger.qmd
+    - 06-vitenskapsfilosofi.qmd
+    - 07-molekylærlab.qmd
+    - Referanser.qmd
+bibliography: 
+  - referanser/01-ref.bib
+  - referanser/02-ref.bib 
+  - referanser/03-ref.bib
+  - referanser/04-ref.bib
+  - referanser/05-ref.bib
+  - referanser/06-ref.bib
+  - referanser/07-ref.bib
+csl: referanser/citation-style.csl
+format: 
+  html:
+    theme: cosmo
+  pdf: 
+    documentclass: scrreprt
+crossref:
+  fig-title: "Figur"
+  tbl-title: "Tabell"
+header-includes:
+  - \usepackage{longtable}

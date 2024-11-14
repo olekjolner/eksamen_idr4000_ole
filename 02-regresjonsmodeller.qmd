@@ -1,0 +1,267 @@
+---
+title: "Regresjonsmodeller"
+bibliography:
+  referanser/02-ref.bib
+editor_options: 
+  chunk_output_type: console
+crossref: 
+  fig-title: "Figur"
+  tbl-title: "Tabell"
+---
+
+## Introduksjon Regresjonsmodeller
+
+En regresjonsmodell er en modell som kvantifiserer forholdet mellom en eller flere uavhengige variabler og en avhengig variabel. Innen medisin er regresjon den analysemtoden som er hyppigst anvendt. Det finnes forskjellige regresjonsmodeller. De vanligste er lineær regresjon, polynominal regresjon og logistisk regresjon. Hva man har av datasett vil bestemme hvilken regresjonsmodell som egner seg best å benytte [@Pisica].
+
+En lineær regresjonsmodell er en modell der en kan estimere verdien av en avhengig variabel basert på verdien av andre kjente uavhengige variabler [@Pisica]. I en slik modell benyttes en rett linje for å lage en modell som beskriver dataen. Følgende funksjon benyttes for å skape det lineære plottet:
+
+y~i~ = b~0~ + b~1~x~i~ + e~i~
+
+der y~i~ er den avhengige variabelen som kan estimeres ved å benytte de uavhengige variablene b~1~x~i~ og b~0~. b~0~ er skjæringspunktet til grafen og b~1~ er stigningstallet til grafen.
+
+I denne rapporten vil ulike tema bli presentert, henholdsvis laktatterskel, estimering av størrelse på DNA fragment og tolkning av regresjonsmodeller. De ulike temaene presenteres med egne delkapitler. Sammenhengen mellom oppgavene er at de omhandler bruker av regresjon og hvordan vi kan tolke denne typen dataanalyse.
+
+## Laktatterskel
+
+### Introduksjon
+
+Laktatterskel refererer ofte til den grensen der kroppen produserer mer laktat enn den evner å omdanne. Laktatterskel brukes ofte som et mål på intensitet, samtidig sier det noe om treningsstatus og evne til å prestere. [@Antonutto]
+
+I denne delen undersøkes forholdet mellom laktatnivå og watt, samt tilpasningen av regresjonsmodeller for å beskrive dette forholdet.
+
+### Metode
+
+I denne analysen ble det hentet data fra *cyclingstudy*-datasettet som en finner i pakken *exscidata* i R. Fra settet ble deltaker 10 benyttet som eksempel. Datasettet ble omstrukturert til et mer passende format (tidy data) for deretter å lage et hensiktsmessig plot. Det ble utført ulike regresjonsmodeller for å fremstille forholdet mellom laktat og watt (se @fig-lacwatt). Laktatverdiene og wattverdiene ble plottet som gule punkter i grafen. Deretter ble en stiplet svart linje tegnet for å forbinde punktene. En ønsket å se på watt-verdier ved hhv. 2 og 4 mmol/L laktat. Derfor ble de lagt til hjelpende horisontale (rød og lilla) og vertikale (stiplede svarte) linjer for å synliggjøre skjæringspunkter på grafen.
+
+For å analysere sammenhengen mellom laktat og watt ble det utført regresjonsanalyser ved hjelp av tre forskjellige modeller: først en lineær modell (blå linje), deretter en andregrads-modell (grønn linje) og til slutt en tredjegrads-modell (rosa linje). Formålet med analysen var å vurdere hvilken av de tre modellene som best predikerer forholdet mellom laktat og watt.
+
+### Resultat
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| fig-cap: "Relasjon mellom laktatverdier og watt. Gule punkter = laktat/watt, blå linje = lineær regresjon, grønn linje = andregradsligning, rosa = tredjegradsligning, rød linje = 2 mmol/L, lilla linje = 4 mmol/L, stiplet svarte linjer = skjæringspunkter mot rød og lilla linje"
+#| label: fig-lacwatt
+
+library(readxl)
+library(tidyr)
+library(exscidata)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(magrittr)
+library(gt)
+library(ggtext)
+library(kableExtra)
+
+# Kalkuler treningsintensitet ved 2 og 4 mmol/L
+
+w <- cyclingstudy |> 
+  select(subject, group, timepoint, lac.225:lac.375) |> 
+  filter(timepoint == "pre", subject == 10) |> 
+  pivot_longer(names_to = "watt", 
+               values_to = "lac",
+               names_prefix = "lac.", 
+               names_transform = list(watt = as.numeric),
+               cols = lac.225:lac.375)
+
+
+plot_watt_lac <- w |> 
+  ggplot(aes(watt, lac, group = subject)) +
+  labs(x = "Watt-verdier",
+       y = expression(Laktatverdier ~ (mmol %.% L^{-1}))) +
+  geom_point(size = 3, shape = 21, fill = "gold") + 
+  geom_line(lty = 2) +
+  geom_smooth(method = lm, se = FALSE) +
+  geom_smooth(method = lm, se = FALSE, formula = y ~ poly(x, 2), color = "lightgreen") +
+  geom_smooth(method = lm, se = FALSE, formula = y ~ poly(x, 3), color = "lightpink") +
+  scale_x_continuous(breaks = c(225, 250, 275, 300, 325, 350, 375)) +
+  scale_y_continuous(breaks = c(0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5)) +
+  coord_cartesian(xlim = c(220, 380)) +
+  geom_hline(yintercept = 2, color = "red") +
+  geom_hline(yintercept = 4, color = "purple") +
+  # Legger inn en vertikal linje, med y = 2mmol, skjæringspunkt 308W, tatt på øyemål.
+  geom_vline(xintercept = 309, linewidth = 1, alpha = 0.8, linetype = "dotted") +
+  # Legger inn en vertikal linje med y = 4mmol, skjæringspunkt 342W, tatt på øyemål.
+  geom_vline(xintercept = 342, linewidth = 1, alpha = 0.8, linetype = "dotted") +
+  theme_minimal()
+
+plot_watt_lac
+
+mod <- lm(lac ~ watt, data = w)
+ 
+x2lac <- (2 - coef(mod)[1]) / coef(mod)[2]
+x4lac <- (4 - coef(mod)[1]) / coef(mod)[2]
+
+```
+
+Den lineære regresjonsmodellen estimerer watt-verdier for henholdsvis 2 og 4 mmol/L intensitet til å være `r round(x2lac, 0)` W og `r round(x4lac, 0)` W. Andregrads- og tredjegradsmodellen kan man se av @fig-lacwatt er tilnærmet lik den stiplede svarte linjen som knytte de gule punktene sammen.
+
+### Diskusjon
+
+Av @fig-lacwatt kan man se at en enkel lineær regresjonsmodell ikke er tilstrekkelig for å estimere sannsynlige verdier for watt. Derimot vil en andre- og tredjegradsmodell passe betydelig bedre opp mot relasjonen watt og laktat. I dette tilfellet predikerer den lineære modellen en watt på `r round(x2lac, 0)` ved 2 mmol **x** L<sup>-1</sup>. Den faktiske watt-verdien ligger dog nærmere 310 W når man ser på krysningspunktet mellom den røde horisontale linjen og den stiplede svarte vertikale linjen.
+
+
+
+
+## Estimering av størrelse på DNA-fragmenter
+
+### Introduksjon
+
+Beregning av størrelse på DNA-fragmenter er en viktig prosess i lab for å kunne identifisere og analysere DNA-prøver. Gelelektroforese er en av metodene som en hyppigst anvendt for dette formålet. DNA-prøvene tilsettes da en agrosegel og separeres etter størrelse ved hjelp at elektrisistet. Store fragment beveger seg langsommere enn små fragment og en vil få en spredning på gelen. Ved å benytte en kjent referansemarkører, kan man estimere størrelsen på DNA-fragmentene. [@Schadock] 
+
+### Metode
+
+Først ble det tatt helblod fra en forsøksperson, og DNA ble ekstrahert ved hjelp av en standard protokoll for blod-DNA-isolering. Ekstraheringen involverte flere trinn, blant dem tilsetning av bufferløsninger og enzymatiske behandlinger for å bryte ned cellemembraner og frigjøre DNA-et. Det ble videre kjørt en elektroforese for å kunne separere DNA fragmentene og bestemme lengden på DNA-fragmentene i basepar. Når elektroforesen var ferdig, ble det tatt et bilde av agrose gel 2%. 
+
+Videre har bildet fra elektroforesen blitt analysert ved hjelp av ImageJ/Fiji og videre dataanalyser ble gjort i R. Logaritmen av molekylvekten ble plottet mot vandret distanse på gel for å estimere størrelse av DNA-fragment med høyere presisjon. 
+
+
+### Resultat
+
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: fig-dnaladder
+#| tbl-cap: "Relasjon mellom logaritmen av molkeylvekten og distansen vandret på gel"
+
+ladder <- data.frame(dist = c(374.5, 396.5, 423.5, 458.5, 496.5, 547.5,607.5,688.5,734.5,792.5,860.5,936.5,1035.5), 
+                     
+                     mw = c(1000, 900, 800, 
+                            700, 600, 500,
+                            400, 300, 250, 
+                            200, 150, 100, 50))
+            
+
+unknown <- data.frame(dist = c(1208.5, 600.5, 18.5, 383.5, 408.5, 436.5, 470.5, 508.5, 559.5, 618.5, 696.5, 742.5, 798.5, 862.5, 935.5, 993.5))
+
+cal <- lm(log(mw) ~ dist, data = ladder)
+
+preds <- exp(predict(cal, newdata = unknown))
+
+plot_ladder <- ladder |>
+  ggplot(aes(dist, log(mw))) + 
+  geom_point(color = "steelblue", size = 3, shape = 21, fill = "gold") +
+  geom_abline(intercept = coef(cal)[1], slope = coef(cal)[2], color = "steelblue", linetype = "dashed", size = 0.8) +
+  labs(x = "Vandret distanse (au)",  
+    y = "Log(molekylvekt)") +
+  scale_x_continuous(breaks = c(400, 500, 600, 700, 800, 900, 1000)) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 12, face = "bold"), 
+    axis.title = element_text(size = 10), 
+    axis.text = element_text(size = 10))
+
+plot_ladder
+  
+```
+
+@fig-dnaladder viser sammenhengen mellom logaritmen av molekylvekten og distanse vandret på gel. Predikert molekylvekt er oppgitt i basepar (bp). 
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: "tbl-molvekt-dist"
+#| tbl-cap: "Prediktert molekylvekt (bp) for gitte distanser (au)"
+
+dataframe2 <- data.frame(unknowns = c(1208.5, 600.5, 18.5, 383.5, 408.5, 436.5, 470.5, 508.5, 559.5, 618.5, 696.5, 742.5, 798.5, 862.5, 935.5, 993.5), (preds)) |> 
+  arrange(unknowns)
+
+cal2 <- lm(log(preds) ~ unknowns, data = dataframe2)
+
+tbl_pred_molvekt <- dataframe2 |>
+  gt() |>
+  cols_label(unknowns = "Ukjente distanser (au)",
+    X.preds. = "Prediktert molekylvekt (bp)") |>
+  tab_options(
+    table.font.size = 10,
+    table.width = "50%",
+    row.striping.include_table_body = TRUE,
+    row.striping.background = "#f9f9f9",
+    table.border.top.style = "solid",
+    table.border.bottom.style = "solid") |> 
+  fmt_number(decimals = 0)
+
+tbl_pred_molvekt
+```
+
+Av @tbl-molvekt-dist ses estimerte verdier for molekylvekten (bp) etter gitt distanse de har vandret nedover gelen. Testresultatene indikerer at for hver enhet man vandrer nedover gelen vil DNA-fragmentets vekt minke med `r round(coef(cal)[2], 5)`. Med modellen hvor molekylvekten predikerers , estimeres en minkning i molekylvekt på `r round(coef(cal2)[2], 5)`. 
+
+
+### Diskusjon
+
+Årsaken til forskjellen i de faktisk målte resultatetne fra labben og de predikerte resultatene kan være målefeil ved bruk av Fiji-programmet, der vi estimerte vandret distanse etter bildene som ble tatt.  
+
+
+
+## Tolke en regresjonstabell
+
+### Introduksjon
+
+Mennesker reponderer foskjellig på styrketrening og det er ønskelig å undersøke hvorfor det er slik. Ulike biomarkører ble undersøkt for å forsøke å finne ut av hva som er årsak til den ulike responsen mellom personer som responderer godt på styrketrening, kontra de som ikke responderer så godt. [@Haun2019] 
+
+### Metode
+
+Denne studien undersøker biomarkører for muskelhypertrofi for lav (LOW) og høy (HIGH) respons på motstandstrening. 30 mannlige universitetsstudenter gjennomførte et 6 ukers høyvolum treningsprogram, og ble delt inn i LOW og HIGH grupper basert på endringer i muskelstørrelse og sammensetning. Det ble tatt blodprøver der testosteronenivå i blodet var en av biomarkørene av interesse. [@Haun2019]
+
+### Resultat
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Figur 3: Sammenheng mellom treningsalder og testosteronverdier i blodet"
+#| label: "tolkning av regresjonsmodell"
+
+library(exscidata)
+library(tidyverse)
+
+dat <- hypertrophy |> 
+  select(GROUP, TRAINING_AGE, AGE, CLUSTER, VL_T2, TESTOSTERONE_T1, TESTOSTERONE_T2)
+
+m <- lm(TESTOSTERONE_T1 ~ TRAINING_AGE, dat)
+sum <- summary(m)
+pval <- round(sum$coefficients[2, 4], 3)
+tval <- round(sum$coefficients[2, 3], 2)
+
+testo_plot <- dat |> 
+  ggplot(aes(TRAINING_AGE, TESTOSTERONE_T1)) +
+    labs(x = "Treningsalder (år)",
+         y = expression(Testosteronverdier ~ ng %.% dl^{-1})) + 
+  geom_point(size = 3, shape = 21, fill = "orange") +
+  geom_abline(intercept = coef(m)[1], slope = coef(m)[2], color = "steelblue", size = 1) +
+    geom_hline(yintercept = coef(m)[1] + coef(m)[2] * 10, color = "darkgreen") +
+    geom_vline(xintercept = 10, color = "darkred") +
+    scale_y_continuous(breaks = c(200, 354, 400, 600, 800, 1000), 
+                       labels = c(200, "testo10", 400, 600, 800, 1000)) + 
+    theme_minimal()
+  
+testo_plot
+  
+  # Den lineære modellen forteller i dette tilfellet at for hvert år man trener, så vil nivå av testosterone synke med 20.51 ng*dl<sup>-1</sup>. I tillegg kan man estimere testonivå etter å ha trent i 10 år. Dette vil vi gjøre med følgende utregning: 
+  
+testo10 <- coef(m)[1] + coef(m)[2] * 10
+testo10rounded <- round(testo10, 2)
+  
+# testosteronnivå etter 10 år med trening estimeres til 354.26 ng*dl^-1
+
+```
+
+Den lineære modellen forteller i dette tilfellet at for hvert år man trener, så vil nivå av testosterone synke med 20.51 ng\*dl<sup>-1</sup>.
+
+### Diskusjon
+
+Fra datasettet hypertrophy valgte vi å se på sammenhengen mellom testosteronkonsentrasjon i blodet (ng **×** dl<sup>-1</sup>) og treningsalder (antall år med trening). Den lineære modellen forteller at testosteronkonsentrasjonen i blodet synker med 20.51 ng **×** dl<sup>-1</sup> for hvert treningsår. Etter 10 år med trening, estimerer den lineære modellen et testosteronnivå på `r testo10rounded` ng **×** dl<sup>-1</sup>.
+
+Analysen av dataene viser en t-verdi på `r tval` og en p-verdi lik `r pval`, noe som indikerer at det ikke er statistisk signifikant bevis for en sammenheng mellom treningsalder og nivået av testosteron i blodet. Den negative *t*-verdien indikerer at tetsosteronnivå synker i tråd med økende treningsalder. Den lave *t*-verdien tyder dog på at denne effekten er relativt liten.
+
+Siden p-verdien er høyere enn det tradisjonelle signifikansnivået på 0.05, kan vi ikke avvise nullhypotesen, som antyder at det ikke er noen betydelig effekt eller sammenheng mellom de to variablene i dette datasettet. Dette betyr at variasjonen i testosteronnivåer ikke ser ut til å være relatert til hvor lenge individene har trent.
+
+

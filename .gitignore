@@ -20,6 +20,7 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -32,6 +33,8 @@ vignettes/*.pdf
 *_cache/
 /cache/
 
+*_files/
+
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
@@ -42,8 +45,13 @@ vignettes/*.pdf
 # pkgdown site
 docs/
 
+# drafts and development code
+devel/
+
 # translation temp files
 po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+/.quarto/
