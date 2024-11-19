@@ -4,9 +4,9 @@ project:
     - "!devel/"
   type: book
 book:
-  title: "Eksamen IDR4000 Ole"
-  author: "Ole-K."
-  date: "2024-11-05"
+  title: "Eksamen IDR4000"
+  author: "Kandidatnummer 501"
+  date: "2024-11-22"
   chapters:
     - index.qmd
     - 01-reliabilitet.qmd
@@ -15,7 +15,7 @@ book:
     - 04-studiedesign.qmd
     - 05-repeterte-målinger.qmd
     - 06-vitenskapsfilosofi.qmd
-    - 07-molekylærlab.qmd
+    - 07-mol-lab.qmd
     - Referanser.qmd
 bibliography: 
   - referanser/01-ref.bib

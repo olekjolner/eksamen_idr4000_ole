@@ -6,11 +6,14 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Introduksjon
+## Introduksjon 
 
-Statistisk inferens er en type statistikk som omhandler metoder for å trekke konklusjoner om en populasjon basert på et utvalg. Målet er å generalisere funnene fra utvalget og bruke det til å si noe om hele populasjonen. En viktig del av statistisk inferens er å vurdere usikkerheten i estimatene, typisk ved hjelp av konfidensintervaller og p-verdier [@Cremers].
+Ifølge Cremers et al. (2017) er statistisk inferens en type statistikk som omhandler metoder for å trekke konklusjoner om en populasjon basert på et utvalg. Målet er å generalisere funnene fra utvalget og bruke det til å si noe om hele populasjonen [@Cremers].
 
-Effektstørrelser gir en kvantitativ vurdering av hvor betydelig en observert effekt er, og er ikke avhengig av utvalgsstørrelse. Dette er nyttig i forskning, da det hjelper med å forstå de praktiske betydningene av funnene man har gjort. Ved å kombinere statistisk inferens med effektstørrelser kan man bedre vurdere resultatene sine og sette det i en bred kontekst [@Cremers].
+En viktig del av statistisk inferens er å vurdere usikkerheten i estimatene, typisk ved hjelp av konfidensintervaller og p-verdier [@Cremers]. Videre skriver Cremers et al. (2017) at effektstørrelser gir en kvantitativ vurdering av hvor betydelig en observert effekt er, og at effekten ikke er avhengig av utvalgsstørrelse. Dette er nyttig i forskning, da det hjelper med å forstå de praktiske betydningene av funnene man har gjort gjennom sammenlikning av grupper med forskjellige utvalgsstørrelser. Ved å kombinere statistisk inferens med effektstørrelser kan man bedre vurdere resultatene sine og sette det i en bred kontekst [@Cremers]. 
+
+I første del av oppgaven defineres statistiske begrep og uttrykk. Deretter simuleres to utvalg på henholdsvis 8 stk og 40 stk. Det er ønskelig å undersøke hvordan utvalgsstørrelse påvirker estimater og resultater av statistiske analyser. Det blir simulert 1000 studier med de to utvalgene og gjort statistiske bergeninger basert på dette. 
+Det er vedlagt kode for gjennomføring av simuleringer bakerst i kapittelet.  
 
 ```{r}
 #| echo: false
@@ -38,89 +41,24 @@ sum2 <- summary(m2)
 ```
 
 
-For å illustrer 
+## *T*-verdi, *P*-verdi, Standard Error (SE) og Estimat 
 
-```{r, fig.width=6, fig.height=4}
-#| echo: false
-#| warning: false
-#| message: false
-#| label: fig-sample1
-#| fig-cap: "Spredning i verdier for n = 8"
-
-
-# plotter samp 1 og 2 for å illustrere den relative spredningen i utvalget
-samp1 |> 
-  ggplot(aes(y, 1)) + geom_point(size = 3, shape = 21, fill = "orange") +
-  geom_vline(xintercept = coef(sum1)[1], color = "steelblue", linewidth = 1.5) +
-  annotate("richtext", 
-           x = coef(sum1)[1], 
-           y = 0.99, 
-           label = "estimate", 
-           angle = -90) +
-  coord_cartesian(y = c(0.98, 1.02)) +
-  labs(subtitle = "Illustrasjon av spredning i verdier", 
-       caption = "Utvalg 1 fra populasjonen (n = 8)",
-       x = "", 
-       y = "")
-```
-
-
-```{r, fig.width=6, fig.height=4}
-#| echo: false
-#| warning: false
-#| message: false
-#| label: fig-sample2
-#| fig-cap: "Spredning i verdier for n = 40"
-
-
-samp2 |> 
-  ggplot(aes(y, 1)) + geom_point(size = 3, shape = 21, fill = "red") +
-  geom_vline(xintercept = coef(sum2)[1], color = "steelblue", linewidth = 1.5) +
-  scale_x_continuous(breaks = c(-2.5, 0, 2.5, 5, 7.5)) +
-  annotate("richtext", 
-           x = coef(sum2)[1], 
-           y = 0.99, 
-           label = "estimate", 
-           angle = -90) +
-  coord_cartesian(y = c(0.98, 1.02)) +
-  labs(subtitle = "Illustrasjon av spredning i verdier",
-       caption = "Utvalg 2 fra populasjonen (n = 40)", 
-       x = "", 
-       y = "")
-```
-
-
-
-## Forklaring av *T*-verdi, *P*-verdi, Standard Error (SE) og Estimat 
-
-*T-verdien* er et mål som brukes i hypotesetesting for å vurdere om det er en signifikant forskjell mellom gjennomsnittet av et utvalg og et kjent eller hypotetisk populasjonsgjennomsnitt. *T*-verdiens størrelse er en indikasjon på hvor stor forskjell det er mellom utvalget og populasjonen. Jo større t-verdi, desto mer signifikant er forskjellen.
+*T-verdien* er et mål som brukes i hypotesetesting for å vurdere om det er en signifikant forskjell mellom gjennomsnittet av et utvalg og et kjent eller hypotetisk populasjonsgjennomsnitt. *T*-verdiens størrelse er en indikasjon på hvor stor forskjell det er mellom utvalget og populasjonen. Jo større *t*-verdi, jo større forskjell mellom gruppene og desto mer signifikant forskjell. 
 
 $t = \frac{(\overline{x}-\mu_{0})} {\frac{s} {\sqrt n}}$, der
 $\overline{x}$ = gjennomsnittet av utvalget, $\mu_{0}$ = gjennomsnittet av populajsonen, s = standardavviket, n = størrelsen av utvalget
 
-*P-verdien* sier noe om usikkerheten i trekningen av utvalget. Kanskje trakk man i sample 1 bare ekstreme verdier. Utvalget vil neppe bli en perfekt representasjon av populasjonen uansett hvordan man trekker ett utvalg. Dette er en usikkerhet man må ta høyde for i ulike studier og dette kan p-verdien hjelpe oss å si noe om. Om vi tar høyde for at nullhypotesten stemmer, hvor mange verdier kan vi forvente er mer ekstreme enn våre observasjoner. *p*-veriden måler altså observasjonene våre opp mot den spesifikke nullhypotesen. Lave *p*-verdier indikerer at det er lite sannsynlig at den observerte forskjellen skyldes tilfeldigheter, og en kan forkaste nullhypotesen. Motsatt indikerer høye *p*-verdier at den observerte forskjellen trolig skyldes tilfeldigheter og en har ikke godt nok grunnlag til å si at det er en forskjell mellom gruppene. 
+*P-verdien* sier noe om usikkerheten i trekningen av utvalget. Kanskje trakk man i utvalg 1 bare ekstreme verdier, eller kun middelverdier. Utvalget vil neppe bli en perfekt representasjon av populasjonen uansett hvordan man trekker ett utvalg. Denne usikkerheten man må ta høyde for i studier og dette kan *p*-verdien hjelpe oss å si noe om. Dersom en tar høyde for at nullhypotesten (H~0~) stemmer, hvor mange verdier kan en forvente er mer ekstreme enn våre observasjoner. *P*-veriden måler altså observasjonene våre opp mot den spesifikke nullhypotesen. Lave *p*-verdier indikerer at det er liten sannsynlighet for at den observerte forskjellen skyldes tilfeldigheter, og gir støtte for å forkaste nullhypotesen. Høye *p*-verdier tyder derimot på at den observerte forskjellen kan være et resultat av tilfeldigheter, og gir dermed ikke tilstrekkelig grunnlag for å forkaste nullhypotesen og konkludere med en reell forskjell mellom gruppene.
 
-*Standard error (SE)* er en måte å angi feilmarginen av et estimat eller måling. Sagt på en annen måte, beskriver SE variasjonen ved repeterte gjennomsnitt for et utvalg knyttet til en populasjon. Man benytter ofte sentralgrenseteoremet i denne sammenhengen, som sier at hvis man gjør en undersøkelse mange ganger, vil resulatene samle seg omkring den sanne verdien. Jo større utvalg, jo mindre feilmargin.
-Manuelt kan man beregne SE ved å ta standardavviket og dele på
-kvadratroten av antall observasjoner. Dette gir oss altså et svar på
-hvor langt unna det sanne gjennomsnittet vi kan forvente å komme. I dette tilfellet ser en at SE for sample 1 er betydelig større enn i sample 2, nettopp pga et mindre utvalg i sample 1. En kan altså forvente å få verdier lenger unna den sanne gjennomsnittsverdien ved et mindre utvalg.
+*Standardfeil (SE)* er en måte å angi feilmarginen av et estimat eller måling. Sagt på en annen måte, beskriver SE variasjonen ved repeterte gjennomsnitt for et utvalg knyttet til en populasjon. Man benytter ofte sentralgrenseteoremet i denne sammenhengen, som sier at hvis en gjør en undersøkelse mange ganger, vil resulatene samle seg omkring den sanne verdien. SE kan beregnes manuelt ved å dele standardavviket på kvadratroten av antall observasjoner. Dette gir et mål på hvor nær det sanne gjennomsnittet vi kan forvente å komme. I dette tilfellet ser vi at SE for utvalg 1 er betydelig større enn for utvalg 2, noe som skyldes at utvalg 1 er mindre. En kan altså forvente å få verdier lenger unna den sanne gjennomsnittsverdien ved et mindre utvalg. Jo større utvalg, jo mindre feilmargin.
 
-*Estmatet* er en verdi som blir kalkulert basert på et utvalg og blir brukt til å estimere noe om en populasjon. Det kan eksempelvis være et estimat på det sanne gjennomsnittet i en befolkning.  
+*Estimatet* er en verdi som blir kalkulert basert på et utvalg og blir brukt til å estimere noe om en populasjon. Det kan eksempelvis være et estimat på det sanne gjennomsnittet i en befolkning.  
 
 
 
-## Hva bidrar til de ulike resulatene i de to studiene (m1 og m2)
+## To-sidet test (two-tailed test)
 
-Forskjellen mellom sample 1 og 2 er først og fremst antall som trekkes ut (utvalget). Med et større utvalg blir SE lavere, *t*-verdien høyere og *p*-verdien lavere, sammenlinket med et utvalg som er mindre. En får mindre variabilitet med større utvalg og større usikkerhet ved mindre utvalg. 
-
-
-
-## Hvorfor benytter en begge "halene" i t-fordelingen (two-tailed test)
-
-En two-tailed test tillater at man ser på mulighet for endring i begge
-retninger, altså positiv og negativ retning. Når man undersøker ulike behandlinger, for eksempel for blodtrykk, vil man være interessert i å vurdere både positive og negative endringer mellom gruppene. En ser etter et avvik i begge retninger av fordelingen og ser om avviket er stort nok til å kunne forkaste nullhypotesen (ref. avsnitt om *t*-verdi over). Høye *t*-verdier referer ofte til lave *p*-verdier, som vil si at det er lite sannsynlig at den observerte forskjellen skyldes tilfeldigheter, gitt at nullhypotesen er sann. Ettersom en ser på forskjeller i begge retninger av fordelingen, må en doble *p*-verdien ved bruk av two-tailed test. 
-
-
+En two-tailed test brukes når man ønsker å vurdere om det er en effekt eller endring i begge retninger – enten positiv eller negativ. Dette betyr at man ikke har noen forhåndsbestemt forventning om retningen på forskjellen mellom gruppene. For eksempel, når man undersøker effekten av en behandling på blodtrykk, vil man være interessert i både økning og reduksjon i blodtrykket mellom gruppene. Testen søker etter avvik i begge retninger av fordelingen og vurderer om avviket er stort nok til å forkaste nullhypotesen. Høye *t*-verdier, som indikerer stor avvik fra nullhypotesen, gir ofte lave *p*-verdier, noe som tyder på at det er lite sannsynlig at den observerte forskjellen skyldes tilfeldigheter. Når man utfører en two-tailed test, dobles *p*-verdien, ettersom man vurderer begge mulige avvik (både positive og negative retninger) fra nullhypotesen. 
 
 
 
@@ -172,11 +110,6 @@ for(i in 1:1000) {
 results <- bind_rows(results_8, results_40)
 ```
 
-## Kalkuler standardavvik for estimat-variabelen og gjennomsnittet av se-variabelen for begge utvalgene.
-
-Standard error: $SE = \frac{\sigma}{\sqrt n}$ , der $\sigma$ =
-standardavviket for utvalget og n = antall i utvalget.
-
 ```{r}
 #| echo: false
 #| warning: false
@@ -190,66 +123,93 @@ mean_se_40 <- mean(results_40$se)
 
 ```
 
-For utvalget med n=8 er standardavviket for snittet av utvalget
-`r round(sd_est_8, digits = 3)` og gjennomsnittet av standardfeilen
-`r round(mean_se_8, digits = 3)`. Altså tilnærmet likt. Det samme
-gjelder for utvalget med n=40 (bare med mindre avvik) der
-standardavviket for snittet av utvalget er
-`r round(sd_est_40, digits = 3)` og gjennomsnittet av standardfeilen er
-`r round(mean_se_40, digits = 3)`. Hvordan kan man definere
-standardfeilen, sett i lys av disse variablene? På generell basis kan
-man si at SE for et utvalg er et estimat på standardavviket til den
-teoretiske fordelingen av gjennomsnitt. Observerer at når "n" (utvalget)
-øker, vil standardfeilen synke (ref. formel for beregning av SE).
 
-## Lag et histogram av *p*-verdiene for de to uvalgene. Hvordan kan histogrammene tolkes og hva forteller de om effekten av størrelsen av utvalget for statistisk styrke?
+## Standardavvik og standardfeilen (SE)
+
+Hva er ammenhengden mellom standardavvik og standardfeil? For å illustrere sammenhengen beregnes standardavviket for estimat-variabelen og gjennomsnittet av SE-variabelen
+
+Standard error: $SE = \frac{\sigma}{\sqrt n}$ , der $\sigma$ =
+standardavviket for utvalget og n = antall i utvalget.
+
+For utvalget med n = 8 er standardavviket for estimatet
+`r round(sd_est_8, digits = 3)` og gjennomsnittet av standardfeilen
+`r round(mean_se_8, digits = 3)`, altså tilnærmet likt. Det samme
+gjelder for utvalget med n = 40 der standardavviket for snittet av utvalget er `r round(sd_est_40, digits = 3)` og gjennomsnittet av standardfeilen er `r round(mean_se_40, digits = 3)`. Nesten tilnærmet likt som i utvalg 1 (n = 8), bare med mindre avvik. Hvordan kan man så definere standardfeilen, sett i lys av disse variablene? På generell basis kan man si at SE for et utvalg er et mål for hvor mye gjennomsnittet i utvalget sannsynligvis vil variere fra det sanne gjennomsnittet i populasjonen. Observerer SE synker når "n" (utvalget) øker.
+
+
+
+## Effekten av utvalgsstørrelse for statistisk styrke
+
+Det simuleres først to utvalg fra en populasjon med gjennomsnitt på 1.5 og standardavvik på 3. 
 
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
 
+# Count the proportion of tests below a certain p-value for each 
+sum_signif_res <- results %>%
+  filter(pval < 0.05) %>%
+  group_by(n) %>%
+  summarise(sig_results = n()/1000)
+```
+
+
+```{r, fig.width=6, fig.height=4}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: fig-pvals
+#| fig-cap: "Fordelingen av *p*-verdier fra 1000 simuleringer"
+
 library(ggtext)
 library(dplyr)
 library(gt)
 
 # A two facets histogram can be created with ggplot2
-results %>%
+histo_pvals <- results %>%
   ggplot(aes(pval)) + 
   geom_histogram(bins = 25, 
                  color = "black", 
                  fill = "orange") +
   facet_wrap(~ n) + 
-  labs(x = "*p*-values", 
-       y = "Number of simulations", 
+  labs(x = "*p*-verdier", 
+       y = "Antall simuleringer", 
        subtitle = "Fordelingen av *p*-verdier fra 1000 simuleringer", 
        caption = "Hver bar representerer antall simuleringer av en gitt *p*-verdi") +
   theme(axis.title.x = element_markdown()) +
 theme(plot.subtitle = element_markdown()) +
   theme(plot.caption = element_markdown())
 
-
-# Count the proportion of tests below a certain p-value for each 
-results %>%
-  filter(pval < 0.05) %>%
-  group_by(n) %>%
-  summarise(sig_results = n()/1000) |> 
-  gt() |> 
-  tab_caption("Summering av signifikante resultater") |> 
-  cols_label(n = "Utvalgsstr.", 
-             sig_results = "Signif. res. / 1000")
+histo_pvals
 ```
 
-I histogrammet med n=8 kan er se stor variasjon innad i utvalgene. Ved
-de 1000 simuleringene som er gjort er det sannsynlig at det har vært
-stor spredning i de variablene som er trekt i samme utvalg (og motsatt).
-Dermed vil disse enkelt-utvalgene gjøre utslag på *p*-verdien begge
-veier. Ved å plotte det slik fremheves også tendensen til falsk-positive
-simuleringer ved p = 0.05. En falsk positiv oppstår når en test
-indikerer en signifikant effekt, slik at man forkaster nullhypotesten
-(H~0~), men det egentlig ikke er en effekt der (H~0~ er sann).
 
-## Antall observasjoner fra hvert utvalg som er under signifikansnivået på 0.05
+```{r, fig.width=5, fig.height=3}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: fig-spredning
+#| fig-cap: "Spredning i verdier for n = 8 og n = 40"
+
+
+# plotter samp 1 og 2 for å illustrere den relative spredningen i utvalget
+ 
+ggplot() +
+  geom_point(data = samp1, aes(x = y, y = 1.05), shape = 21, size = 3, fill = "gold") +
+  geom_point(data = samp2, aes(x = y, y = 1.15), shape = 21, size = 3, fill = "purple") +
+  coord_cartesian(y = c(1.0, 1.2)) +
+  labs(subtitle = "Illustrasjon av spredning innad i utvalgene", 
+       caption = "Utvalg 1 (gule punkter) og utvalg 2 (lilla punkter) fra populasjonen",
+       x = "", 
+       y = "") +
+  theme(axis.text.x = element_blank(),
+    axis.text.y = element_blank(), 
+    axis.ticks.x = element_blank(),  
+    axis.ticks.y = element_blank())
+
+```
+
 
 ```{r}
 #| echo: false
@@ -267,16 +227,12 @@ n_sig_40 <- results |>
 
 ```
 
-Setter signifikansnivå til p \< 0.05 Det er `r n_sig_40` tilfeller der p
-\< 0.05 for utvalget med 40. Det er `r n_sig_8` tilfeller der p\< 0.05
-for utvalget med 8.
-
-## Estmerer effekten ved one-sample t-test
 
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
+#| label: Effekten ved one-sample t-test
 
 # Using the pwr package
 library(pwr)
@@ -284,18 +240,23 @@ library(pwr)
 pwr_8 <- pwr.t.test(n = 8, sig.level = 0.05, d = 1.5/3, type = "one.sample")
 pwr_40 <- pwr.t.test(n = 40, sig.level = 0.05, d = 1.5/3, type = "one.sample")
 
-pwr_8
-pwr_40
+p8pros <- round((pwr_8$power*100), 0)
+p40pros <- round((pwr_40$power*100), 0)
 ```
 
-Effekt ved utavlget på 8 stk: `r round(pwr_8$power, digits = 3)`. Effekt
-ved utvalget på 40 stk: `r round(pwr_40$power, digits = 3)`. En kan
-forvente høyere effekt med et større utvalg. Dette observeres i vårt
-tilfelle. Med høyere effekt, vil en også forvente å se større grad av
-signifikans, altså en lavere *p*-verdi (som også er tilfellet i denne
-simuleringen).
+Som en nå har observert, ligger forskjellen mellom utvalg 1 og 2 altså først og fremst i størrelsen på utvalgene. Med et større utvalg ser en typisk lavere standardfeil (SE) og *p*-verdier, samt høyere *t*-verdier. Et større utvalg minimerer også risikoen for å gjøre type II-feil, altså at man ikke forkaster nullhypotesen når den er faktisk er falsk. Dette skyldes at større utvalg gir mindre variabilitet og dermed lavere usikkerhet sammenlignet med mindre utvalg. Utvalgsstørrelse påvirker dog ikke risikoen for å gjøre type I-feil, da dette bestemmes av signifikansnivået som settes (typisk $\alpha$ < 0.05). 
 
-## Ved å benytte det nye datasettet: hvor mange tilfeller av "falsk positive"-tester vil vi komme over ved å repetere studien mange ganger?
+I @fig-pvals oberveres en jevnere fordeling av simulerte *p*-verdier i utvalget n = 8, sammenliknet med n = 40. Dette er et resultat av at den tilfeldige variasjonen blir større i små utvalg (@fig-spredning). Større utvalg gjør testen mer følsom for små effekter, noe som ofte resulterer i lavere *p*-verdier. Dette gjør det lettere å forkaste nullhypotesen. 
+
+Ved å plotte *p*-verdiene for 1000 simuleringer fremheves også tendensen til falsk-positive (type I-feil) simuleringer ved *p* = 0.05. En falsk positiv oppstår når en test indikerer en signifikant effekt, slik at man forkaster nullhypotesten (H~0~), når det egentlig ikke er en effekt der (H~0~ er sann). Jo større utvalg man har, desto større risiko er det for å gjøre type I-feil. Når en setter signifikansnivået til p < 0.05, kan en observere antallet signifikante resultater i hvert utvalg. For utvalget med 40 observasjoner finner en `r n_sig_40` signifikante simuleringer, mens for utvalget med 8 observasjoner finner en `r n_sig_8` signifikante simuleringer. Her observeres langt flere signifikante resulater for utvalg med n = 40, som er i tråd med det en forventer. Sannsynligvis vil flere av de `r n_sig_40` testene være type I-feil da utvalgsstørrelsen gir høyere sensitivitet for å finne en effekt uten at den nødvendigvis eksisterer. På en annen siden gir større utvalg også større statistisk styrke.  
+
+Statistisk styrke (power) refererer til sannsynligheten for å korrekt avvise nullhypotesen, og ved å sammenligne antall observasjoner under signifikansnivået vil en få en indikasjon på styrken i testene. Den statistiske styrken for utvalg n = 8 blir beregnet til `r p8pros` %, mens for n = 40 blir den beregnet til `r p40pros` %. Effektstørrelsen er i dette tilfellet satt til 0.5. Ifølge Cohens'd er den forventede effekten liten ved 0.2, moderat ved 0.5 og stor ved 0.8 [@Lakens]. 
+
+Den beregnede statistiske styrken for n = 8 på `r p8pros` % indikerer lav sannsynlighet for å oppdage en reell effekt, dersom den er tilstede. Det vil altså være større sjans for å gjøre en type II-feil med det lille utvalget. For n = 40 var styrken `r p40pros` %, som betyr at sjansen for å oppdage en reell effekt er stor dersom den eksisterer. Dette baseres på den lave usikkerheten i estimatene som følger med et større utvalg. 
+
+
+\newpage
+
 
 ```{r}
 #| echo: false
@@ -341,27 +302,6 @@ for(i in 1:1000) {
 results_null <- bind_rows(results_8, results_40)
 ```
 
-```{r, fig.width=6, fig.height=4}
-#| echo: false
-#| warning: false
-#| message: false
-
-#lager histogram for koden over
-
-ggplot(data = results_null, aes(pval)) +
-  geom_histogram(binwidth = 0.05, 
-                 color = "black", fill = "lightgreen",) +
-facet_wrap(~ n) +
-  labs(subtitle = "Fordelingen av *p*-verdier fra 1000 simuleringer", 
-       caption = "Hver bar representerer antall simuleringer av en gitt *p*-verdi", 
-       x = "*p*-verdier", 
-       y = "Number of simulations") +
-  theme(axis.title.x = element_markdown()) +
-theme(plot.subtitle = element_markdown()) +
-  theme(plot.caption = element_markdown())
-
-
-```
 
 ```{r}
 #| echo: false
@@ -378,8 +318,67 @@ falsepos_40 <- results_null |>
 
 ```
 
-Ved å repetere studien 1000 ganger, vil vi komme over `r falsepos_8`
-falsk-positive tester for utvalget med 8, og `r falsepos_40` for
-utvalget med 40. Totalt antall falsk-positive tester blir
-`r (falsepos_8 + falsepos_40)`.
+
+```{r, fig.width=6, fig.height=4}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: fig-gpval
+#| fig-cap: "Antall simuleringer av en gitt *p*-verdi med et befolkningsgjennomsnitt på 0"
+
+#lager histogram for koden over
+
+gitt_pval <- ggplot(data = results_null, aes(pval)) +
+  geom_histogram(binwidth = 0.05, 
+                 color = "black", fill = "lightgreen",) +
+facet_wrap(~ n) +
+  labs(subtitle = "Fordelingen av *p*-verdier fra 1000 simuleringer med populasjonsgjennomsnitt lik 0", 
+       caption = "Hver bar representerer antall simuleringer av en gitt *p*-verdi", 
+       x = "*p*-verdier", 
+       y = "Antall simuleringer") +
+  theme(axis.title.x = element_markdown()) +
+theme(plot.subtitle = element_markdown()) +
+  theme(plot.caption = element_markdown())
+
+gitt_pval
+
+```
+
+
+Gjør så nye 1000 simuleringer med samme utvalgsstørrelser, men med et gjennomsnitt i befolkningen på 0 og standardavvik på 3. I dette tilfellet vil altså nullhypotesen være sann. Med den nye simuleringen vil en komme over `r falsepos_8` falsk-positive tester for utvalget med 8, og `r falsepos_40` for utvalget med 40. Sammenlikner man @fig-pvals og @fig-gpval, ser en at fordelingen av *p*-verdier er jevnere ved et gjennomsnitt i befolkningen på 0. Dette kommer av at de estimerte gjennomsittsverdiene for begge utvalg vil ligge nært 0 og man vil sjeldent få verdier som motbeviser nullhypotesen.  
+
+
+I denne simuleringen finner en flere falsk positive tester med det store utvalget, sammenliknet med den lille utvalget. Dette er kanskje motsatt av hva en kan forvente og det kan være flere grunner til det. En av grunnene kan være at et større utvalg gjør tester mer sensitive for selv små effekter, altså at man finner flere tilfeldige signifikante resultater. Det blir altså lettere å få *p*-verdier under signifikansnivå og dermed kan det oppstå flere type I-feil. Dette gjelder også der gjennomsnittet er forskjellig fra 0.  
+
+
+
+## Koder for simuleringer
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+
+set.seed(1)
+
+#Første simulering med gjennomsnitt 1.5 og sd 3
+population <- rnorm(1000000, mean = 1.5, sd = 3)
+
+#lager to ulike utvalg der utvalg 1 er n=8 og utvalg er 2 n=40
+samp1 <- data.frame(y = sample(population, 8, replace = FALSE))
+samp2 <- data.frame(y = sample(population, 40, replace = FALSE))
+
+# Andre simulering med gjennomsnitt 0 og sd 3. Hva skjer når nullhypotesen er sann. 
+population <- rnorm(1000000, mean = 0, sd = 3)
+
+samp1 <- data.frame(y = sample(population, 8, replace = FALSE))
+samp2 <- data.frame(y = sample(population, 40, replace = FALSE))
+
+#Det gjøres 1000 simuleringer ved både første og andre simulering
+#Har med denne chunken primært for å illustrere forskjellen i gjennomsnitt ved de to ulike simuleringene. 
+#NB: Koden i chunken er ufullstendig da det mangler funksjon for simulering. 
+
+
+```
 

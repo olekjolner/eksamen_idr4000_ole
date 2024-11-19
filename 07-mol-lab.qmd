@@ -1,0 +1,226 @@
+---
+title: "RNA ekstraksjon og analyse"
+bibliography: 
+  referanser/07-ref.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+## Introduksjon
+
+I forskning finnes flere metoder for å studere genuttrykk, og en av de mest brukte teknikkene er kvantitativ fluoresens-basert sanntids polymerase kjedereaksjon (qPCR). Ifølge Kuang et al. (2018) gir denne metoden en presis sanntidsmåling av genuttrykk og er særlig verdifull innen treningsfysiologi for å undersøke hvordan trening påvirker uttrykket av spesifikke gener. qPCR gjør det mulig å kvantifisere nivåene av et målgen, for eksempel i muskelvev, og studere hvordan disse nivåene kan endres som respons på fysiologiske stimuli [@kuang2018]. 
+
+Videre beskriver Kuang et al. (2018) hvordan qPCR kan brukes til å undersøke treningsinduserte endringer i genuttrykk, inkludert gener relatert til muskelfibertyper. Dette gir verdifull innsikt i de molekylære mekanismene bak muskeltilpasning og hvordan gener responderer på forskjellige faktorer ved trening, noe som bidrar til en dypere forståelse av treningsinduserte tilpasninger i kroppen [@kuang2018]. 
+
+
+## Metode
+
+### Overordnet metode
+
+Kuang et al. (2018) skriver så om metoden for å studere genuttrykk. Første steget er at RNA-et må bli cDNA (komplementært DNA). Denne prosessen kalles reversert transkripsjon. Videre vil cDNA bli kopiert slik at man får milliarder av kopier gjennom PCR prosessen. cDNA-et blir først utsatt for høy temperatur slik at den doble DNA tråden blir splittet til en enkeltråd (denaturering). Det andre steget er at temperaturen så senkes. Da vil cDNA-primere kunne binde seg (annealing). I tredje og siste steget øker temperaturen slik at primere binder seg og vi får en ny dobbelt tråd (elongering) [@kuang2018]. 
+
+Videre beskriver Kuang et al. (2018) hvordan PCR-syklusen gjentas flere ganger, og mengden cDNA øker eksponentielt for hver syklus. En vanlig metode for å overvåke denne prosessen i sanntid er SYBR Green-metoden. I denne metoden brukes et fluorescerende fargestoff (SYBR Green), som binder seg til den doble cDNA-tråden. Ved å bruke fluorescens kan man følge cDNA-amplifikasjonen i sanntid, ettersom det tas et bilde av fluorscensen etter hver syklus [@kuang2018].
+
+Fluorescensen øker eksponentielt med hver syklus, ettersom mer cDNA produseres. Målet med metoden er å identifisere syklisk terskel (CT)-verdien, som er den syklusen hvor fluorescensen når en forhåndsbestemt terskelverdi. CT-verdien gir et mål for hvor raskt fluorescensen når denne terskelen, og dermed hvor mye cDNA som er til stede i prøven [@kuang2018].
+
+Jo lavere CT-verdi, desto høyere nivå av det spesifikke målgenet er til stede i prøven. Derfor kan CT-verdien brukes til å kvantifisere mengden av det målte genet i forhold til et referansegen eller kontroll [@livak2001].
+
+### Detaljert fremgangsmåte for qPCR
+
+Ved start på forsøket ble ferdig cDNA utdelt fra et tidligere gjennomført styrkeprosjekt av labansvarlig. For å kunne kjøre en qPCR ble det brukt cDNA og en Master mix. Denne Master mixen bestod av 50 &micro;l SYBR-green, 20 &micro;l H~2~O og 10 &micro;l primer mix (myhc I, myhc IIx eller myhc IIa). Det ble også laget en Master mix som kontroll. Denne mestod av 50 &micro;l b2m primer mix, 100 &micro;l H~2~O og 250 &micro;l SYBR-green. 
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: tbl-fortynn
+#| tbl-cap: "Fortynningsrekkene som ble laget i forsøket "
+
+library(gt)
+
+
+fortynning <- data.frame(Fortynning = c("1", "1/10", "1/100", "1/1000", "1/2", "1/20", "1/200"),
+  Prove = c(30, 2, 2, 2, 10, 2, 2),
+  H2O = c(0, 18, 18, 18, 10, 18, 18))
+
+fortynning |> 
+  gt() |> 
+  cols_label(Prove = md("Pr&oslash;ve"), 
+             H2O = md("H<sub>2</sub>O"))
+
+```
+
+Forsøket innebar også å lage to fortynningsrekker (se @tbl-fortynn). Det ble brukt cmyc primer som ble fortynnet med H~2~O. I 1/1 prøven var det 30 &micro;l ved start. 1/1 prøven ble benyttet i fortynningen av de andre prøvene. Der var til slutt 20 &micro;l i alle fortynningene.  
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: tbl-fortynning
+#| tbl-cap: "Tabelloversikt over fortynningsrekkene i triplikat"
+
+
+fort <- data.frame("Rad" = c("A", "B", "C"),
+                   "K5" = rep("cmyc1", 3), 
+                   "K6" = rep("cmyc 2a", 3), 
+                   "K7" = rep("cmyc 3a", 3), 
+                   "K8" = rep("cmyc 4a", 3), 
+                   "K9" = rep("cmyc 2b", 3), 
+                   "K10" = rep("cmyc 3b", 3), 
+                   "K11" = rep("cmyc 4b", 3))
+
+fort |> 
+  gt() |> 
+  cols_label( Rad = "", 
+              K5 = "5",
+             K6 = "6", 
+             K7 = "7", 
+             K8 = "8", 
+             K9 = "9", 
+             K10 = "10", 
+             K11 = "11") |> 
+  tab_footnote(footnote = "Slik ble triplikatene plassert i brønnene")
+
+```
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: tbl-gener
+#| tbl-cap: "Tabelloversikt over genuttrykk"
+
+
+
+data <- data.frame("Rad" = LETTERS[1:12], 
+  "K1" = c("myhc I", "myhc I", "myhc I", "myhc IIa", "myhc IIa", "myhc IIa", "myhc IIx", "myhc IIx", "myhc IIx", "b2m", "b2m", "b2m"),
+  "K2" = c("myhc I", "myhc I", "myhc I", "myhc IIa", "myhc IIa", "myhc IIa", "myhc IIx", "myhc IIx", "myhc IIx", "b2m", "b2m", "b2m"))
+
+data |> 
+  gt() |> 
+  cols_label(K1 = "1", 
+             K2 = "2", 
+             Rad = "") |> 
+  tab_footnote(footnote = "Kolonne 1 = prøver ved uke 0, kolonne 2 = prøver ved uke 12")
+```
+
+
+
+Videre ble prøvene pippetert over i brønner etter pippeteringskartet, se @tbl-gener. Brønnene ble fylt med 8 &micro;l primer-spesifikk prøve samt 2 &micro;l cDNA-løsning eller kontrolløsning (Brønner: Rad A-L, kolonne 1 og 2). Deretter ble fortynningsrekkene pippetert over i brønner (Rad A-C, kolonne 5-11) (@tbl-fortynning). Dette ble utført i triplikat for alle prøvene.
+
+Videre ble qPCR-prøven kjørt i sanntids PCR (Applied Biosystems 7500 Fast Real-Time PCR Systems, Life Technologies AS) ved bruk av Quant Studio 5. Prosessen bestod av tre ulike steg. Første steget var et «Hold stage», hvor temperaturen økes med 1,99 °C/s opp til 50 °C. Temperaturen lå deretter konstant på 50 °C i 2 minutter før den videre ble økt med 1,99 °C/s opp til 95 °C, og forble på 95 °C i 2 minutter.
+
+Det neste steget var selve PCR-prosessen, kalt «PCR stage», som besto av 40 sykluser. Én syklus inkluderte 1 sekund på 95 °C, deretter senkes temperaturen med 1,77 °C/s til 60 °C, hvor temperaturen ble holdt konstant i 30 sekunder. Etter hver syklus ble det tatt et bilde av fluoresensen.
+
+Siste steget, kalt «Melt stage», begynte med at temperaturen økte med 1,99 °C/s opp til 95 °C. Temperaturen ble holdt konstant i 15 sekunder, før den gradvis ble senket med 1,77 °C/s til den nådde 60 °C, hvor temperaturen ble holdt konstant i 1 minutt. Temperaturen ble deretter økt med 0,15 °C/s opp til 95 °C, og holdt konstant i 15 sekunder.
+
+Når PCR-prosessen var ferdig, ble CT-verdiene hentet ut. Verdiene ble deretter databehandlet og analysert ved hjelp av Excel, Microsoft Office og primer effektiviteten ble beregnet. 
+
+## Resultater
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: tbl-ctvals
+#| tbl-cap: "Ct-verdier"
+
+library(gt)
+
+ct_data <- data.frame(
+  sample_name = c("Kontroll", "U0", "U12", "U0", "U12", "U0", "U12"),
+  target_name = c("b2m", "myhc I", "myhc I", "myhc IIa", "myhc IIa", "myhc IIx", "myhc IIx"),
+  Ct1 = c(23.427, 18.299, 18.431, 22.419, 18.393, 25.708, 25.120),
+  Ct2 = c(24.072, 19.223, 19.080, 17.707, 18.731, 25.036, 23.575),
+  Ct3 = c(23.318, 19.764, 18.348, 18.314, 35.236, 23.771, 23.052)
+)
+
+
+ct_data$average_Ct <- rowMeans(ct_data[, c("Ct1", "Ct2", "Ct3")])
+
+
+ct_data |> 
+  gt() |> 
+  cols_label(sample_name = md("Pr&oslash;ve"), 
+             target_name = "Genuttrykk", 
+             average_Ct = "Ct gj.snitt") |> 
+  fmt_number(decimals = 2) |> 
+  tab_footnote(footnote = "Ct gj.snitt = gjennomsnitt av Ct1, Ct2 og Ct3")
+
+w0_myhc1 <- ct_data$average_Ct[2]
+w12_myhc1 <- ct_data$average_Ct[3]
+w0_myhc2a <- ct_data$average_Ct[4]
+w12_myhc2a <- ct_data$average_Ct[5]
+w0_myhc2x <- ct_data$average_Ct[6]
+w12_myhc2x <- ct_data$average_Ct[7]
+```
+
+Endringen i CT-verdier fra uke 0 til uke 12 viser en reduksjon i antall sykluser for myhc I, mens for myhc IIa og myhc IIx er det observert en økning i antall sykluser før Ct-verdien nås (@tbl-ctvals).
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: tbl-genes
+#| tbl-cap: "Prosentvis fordeling av genuttrykk"
+
+
+genuttrykk <- data.frame(
+  time_point = c("Uke 0", "Uke 12"),
+  MHC1 = c(56, 95),
+  MHC2a = c(43, 2),
+  MHC2x = c(1, 2))
+
+genuttrykk |> 
+  gt() |> 
+  cols_label(time_point = "Tidspunkt", 
+             MHC1 = "myhc I", 
+             MHC2a = "myhc IIa", 
+             MHC2x = "myhc IIx") |> 
+  tab_footnote(footnote = "Andel genuttrykk (%) ved uke 0 og uke 12")
+
+u0_myhc1 <- genuttrykk$MHC1[1]
+u12_myhc1 <- genuttrykk$MHC1[2]
+u0_myhc2a <- genuttrykk$MHC2a[1]
+u12_myhc2a <- genuttrykk$MHC2a[2]
+u0_myhc2x <- genuttrykk$MHC2x[1]
+u12_myhc2x <- genuttrykk$MHC2x[2]
+
+```
+
+
+Som vist i @tbl-genes, økte andelen myhc I markant fra før til etter treningsintervensjonen. Andelen myhc IIx økte også noe, mens andelen myhc IIa viste en betydelig reduksjon.
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+primer_efficiency <- data.frame(
+  slope = -2.4774046,
+  primer_eff = 153.31)
+```
+
+Basert på de gjennomsnittlige Ct-verdiene og logaritmen av fortynningene, ble primerens effektivitet beregnet til `r round(primer_efficiency$primer_eff, 0)` %. 
+
+
+## Diskusjon
+
+Målet med forsøket var å undersøke endringer i myosintungkjedene etter en styrketreningsintervesjon på 12 uker for en utrent forsøksperson ved hjelp av qPCR. 
+
+I forsøket ble det undersøkt hvor mange sykluser CT-verdiene for de ulike myosintungkjedene trengte for å nå sin sykliske terskelverdi (CT). Færre sykluser og lavere CT-verdier indikerer større genuttrykk. Våre resultater viser en endring i antall sykluser som kreves for at myosintungkjedene skal nå sin CT-verdi. Den prosentvise endringen for tungkjedenes CT-verdier er betydelig for myhc I og IIa. Genuttrykket for myhc I økte betydelig, mens uttrykket for myhc IIa og myhc IIx viste begge en reduksjon, med en større nedgang for myhc IIa sammenlignet med myhc IIx.
+
+I en tidligere studie av Ellefsen et al. (2014), hvor en styrketreningsintervensjon ble gjennomført på utrente individer over 12 uker, ble det observert en økning i myhc IIa, en reduksjon i myhc IIx, samt stabilitet i myhc I [@ellefsen2014]. I kontrast til dette viser våre resultater motstridende funn, med både reduksjon i myhc IIa og myhc IIx, samt en betydelig økning i myhc I. 
+
+Andre studier, som Terzis et al. (2008) og Andersen et al. (2000), viste også at utrente personer med overvekt av myhc IIx opplever en reduksjon i myhc IIx og en økning i myhc IIa ved trening, med minimal endring i myhc I [@terzis2008; @andersen2000]. Det er kjent at genuttrykk ikke kan endres fra myhc I til myhc IIa eller myhc IIx, noe som gjør det vanskelig å forklare de resultatene vi har fått fra analysen av myosintungkjeder. Dette reiser spørsmål om hva som kan ha skjedd under vår analyse og om det er spesifikke faktorer ved vårt eksperiment som kan ha bidratt til disse avvikene fra tidligere forskning.
+
+En mulig kilde til usikkerhet kan være pippeteringsferdighetene og kvaliteten på primere som ble brukt i forsøket. Det er en risiko for at primere kan ha vært utgått på dato eller at feil primer ble valgt. Primerens effektivitet burde ligge mellom 90 % og 110 %, men i vårt tilfelle ble effektiviteten målt til `r round(primer_efficiency$primer_eff, 0)` %. Dette kan tyde på at menneskelige feil kan ha påvirket resultatene. 
+
+Videre er det problematisk å trekke entydige konklusjoner basert på kun én prøve. I tillegg mangler vi forkunnskap om hvilken type treningsstimuli deltakerne har vært utsatt for, bortsett fra den informasjonen vi har fått fra labansvarlig.
+
+## Konklusjon
+
+Basert på resultatene vi har fått i dette forsøket, kan vi ikke trekke noen konklusjoner om endringene i myosintungkjedene for denne forsøkspersonen. De observerte resultatene er ikke i samsvar med det som er rapportert i tidligere forskning, og derfor kan vi ikke vurdere disse funnene som representative eller pålitelige.

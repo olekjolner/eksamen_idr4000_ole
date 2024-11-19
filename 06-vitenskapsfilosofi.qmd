@@ -2,4 +2,56 @@
 title: "Vitenskapsfilosofi"
 bibliography: 
   referanser/06-ref.bib
+editor_options: 
+  chunk_output_type: console
 ---
+
+
+## Falsifikasjonisme
+
+Falsifikasjon, eller det motsatte av verifikasjon, er en teori som etterstreber å motbevise hypoteser og teorier [@Popper]. Tradisjonelt sett bygger man opp en hypotese for å gjøre en kvalifisert gjentning eller antakelse om noe man ønsker å finne ut av, enten det er å avkrefte eller bekrefte noe. Men kan man noen gang bekrefte en teori? En kjent forsker og filosof som mente at man aldri kunne bekrefte en teori, var Karl Popper. Popper (1963) mente at teorier aldri kan bevises med absolutt sikkerhet og at man heller bør legge vekt på å avsløre usannheter. En teori kan dog midlertidig aksepteres dersom den overlever flere forsøk på falsifisering, men det vil alltid være en mulighet for at den på en senere tidspunkt kan motbevises [@Popper].
+
+Poppers motivasjon for å utarbeide teorien om falsifisering hadde trolig sammenheng med at han ikke trodde induksjonsproblemet kunne løses. Et eksempel på induktivt resonnement er: alle svanene jeg har sett er hvite, derfor er alle svaner som finnes hvite. Popper så trolig nytten av å forkaste hypoteser som ikke var gode nok, slik at nye og bedre hypoteser kunne konstrueres. En skal dog se at Popper sine ideer byr på flere utfordringer når det kommer til dagens teknologi, data og forskning. 
+
+Innen falsifikasjonisme er altså begrepet testbarhet et viktig faktum. En teori eller hypotese bør være formulert på en slik at måte den enkelt kan testes og motbevises. Ifølge Popper kreves det kun én observasjon som ikke stemmer overens med hypotesen for at vi kan forkaste den [@Popper]. Et eksempel på et slikt scenario kan være følgende: *Vann koker ved 100 grader celsius*. Hvis man er 1000 m.o.h. er det kjent at vann koker ved lavere temperaturer enn ved havnivå. Ifølge Popper kan man da forkaste hypotesen om at vann koker ved 100 grader celsius, da det ikke nødvendigvis alltid gjør det. 
+
+Som nevnt over er testbarheten til en hypotese et viktig punkt innen falsifikasjonisme og også et av problemene som oppstår med denne ideen. La oss bruke eksempelet over med kokende vann og omformulere hypotesen: *Vann har en tendens til å koke under bestemte forhold*. Denne formuleringen er vag og åpen for tolkning, men dog muligens enkel å falsifisere, eller? Hvilke forhold er det snakk om og hva menes med tendens til å koke? Mindre konkrete hypoteser er generelt sett mer utfordrende å motbevise. Popper mente derfor at lite konkrete hypoteser er mindre vitenskapelige. Han mente derfor at en bør foretrekke spesifikke teorier som enkelt lar seg sette på prøve. Jo lettere det er å falsifisere en teori, destod mer vitenskapelig er den [@Popper]. 
+
+Ved å være enda mer spesifikke i formuleringen av teorier og hypoteser kan man motarbeide dette problemet med vaghet. Tydelige kriterier og konkrete utsagn i sin hypotese vil føre til at hypotesen er enklere å utfordre. Igjen kan en se på et eksempel med kokende vann som er helt i andre enden av skalaen sammenliknet med det vage eksempelet i avsnittet over. *Rent vann som ikke er forurenset vil koke ved 100 grader celsius ved normalt atmosfærisk trykk (760 mmHg) når det ikke er bevegelse i vannet og det foregår i et lukket miljø*. Her har en spesifisert teorien i stor grad, noe Popper var begeistret for. Består denne hypotesen ved gjentatt testing, vil den fremstå som robust, men som tidligere nevnt, kun midlertidig akseptert, ifølge Popper [@Glass]. 
+
+Et annet problem med Poppers falsifiseringsteori er at den ikke tar høyde for teorier som utvikles over tid. En teori som først virker falsifiserbar, kan senere vise seg å være delvis riktig og revideres eller utvides i lys av nye data. Innen medisin er det vanlig at hypoteser modnes og utvikles før de kan testes på en endelig måte. Poppers strenge krav til falsifisering kan derfor hemme vitenskapelig utvikling ved å avvise teorier i et tidlig stadium.
+
+
+## Bayesianisme
+
+Det finnes ulike modeller for å beregne sannsynligheten for noe. Noen modeller baserer seg på empirisk data, som at solen stod opp i går, og dagen før der, og dagen før der igjen, osv. Derfor vil sannsynligvis solen stå opp i morgen også (induktivt resonnement). I nyere tid er det populært å forkaste hypoteser, på samme måte som Popper og falsifisering. Ifølge Joyce (2004) skiller Bayesianismen seg fra slike sluttrekninger ved at sannsynligheten beregnes via matematiske formler. Bayesianere benytter data for å forklare hvorvidt en hypotese er mer eller mindre sannsynlig. Troen på en hypotese kan altså oppdateres med ny data. Ergo benytter Bayesianere en modell som tar høyde for ny og kontinuerlig data [@Joyce]. 
+
+Bayesianismen bygger på Bayes teorem som ser slik ut: 
+
+$P(H|D) = \frac{P(D|H) * P(H)}{P(D)}$  
+
+der P(H|D) er den posteriore sannsynligheten, P(D|H) er sannsynligheten for å observere dataen gitt hypotesen (likelihood), P(D) er den den totale sannsynligheten for dataen og P(H) er troen på hypotesen før dataen er observert (prior sannsynlighet). Posterior sannsynlighet refererer til sannsynligheten for en gitt hypotese eller teori etter at man har tatt hensyn til informasjon eller data man har tilgjengelig. Enkelt forklart forteller posterior sannsynlighet hvor sann en hypotese er etter å ha vurdert ny og gammel informasjon på området. 
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+phd <- 100*((0.95*0.02)/0.117)
+```
+
+Benytter videre et eksempel for å illustrere hvordan Bayes teorem kan tolkes. Spørsmålet en lurer på er hvor stor sannsynlighet det er for at en pasient har en gitt sykdom. Basert på forholdene settes sannsynligheten for at pasientene har sykdommen til 2 % (P(H) = 0.02). En test benyttes for å undersøke om pasienten har sykdommen. Gitt at pasienten har sykdommen, vil testen slå ut positivt 95 % av gangene (P(D|H) = 0.95). Motsatt vil testen slå ut negativt i 90 % av tilfellene når pasienten ikke er smittet av sykdommen (P(~D|~H) = 0.9). Ytterligere beregninger gjøres med Bayes teorem og finner en sannsynlighet tilnærmet `r round(phd, 0)` % for at pasienten faktisk har sykdommen gitt positiv test. 
+
+
+
+
+Det er altså kun $\approx$ 16 % sannsynlighet for at pasienten er smittet når testen slår ut positivt. Grunnet til dette er den i utgangspunktet lave sannsynligheten for å være smittet av den gitte sykdommen. Prior sannsynlighet bestemmer altså i stor grad den posteriore sannsynligheten P(H|D). 
+
+Bayesianerer benytter altså matematiske formler der man bruker ulike sannsynligheter man beregner på forhånd basert på forholdene som ligger til grunn. På denne måten kan Bayesianere objektivt analysere og sannsynligjøre hendelser. Eller er disse beregningene så objektive?
+
+Et problem som ofte kommenteres ved Bayesianismen er den subjektive oppfatningen av prior sannsynligheten (*P(H)*) og hvilken verdi denne settes til. En forskers subjektive oppfatning vil kunne ha stor påvirkning på posterior sannsynlighet. Dette ses på som en svakhet innen Bayesianismen [@Redmayne]. 
+
+Det er ønskelig å minimere grad av subjektivitet og usikkerhet knyttet til valg av priors. Et alternativ kan være å la noen utenforstående, med høy grad av kunnskap på området bestemme prior-verdien. På samme måte kan en se til eksisterende forskning på området og benytte samme priors som er benyttet ved tidligere forskning på området. En kan også benytte flere ulike priors og se hvordan dette vil påvirke utfallet. Deretter kan man vurdere hvilken prior-verdi som passer best til sin aktuelle modell. Ulike modeller vil ha hvert sitt behov når det kommer til hvilken prior som passer best.
+
+Et annet problem med Bayesianisme er at metoden kan være sensitiv for små justeringer i dataene, spesielt når man har lite informasjon. Dersom man starter med en usikker prior, kan selv små justeringer i de nye dataene føre til store forandringer i den posterior sannsynligheten. Dette kan føre til overdreven usikkerhet i estimatene, eller i verste fall føre til at man trekker konklusjoner som ikke stemmer overens med virkeligheten. 
+

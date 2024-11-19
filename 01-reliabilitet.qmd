@@ -9,15 +9,15 @@ editor_options:
 
 ## Introduksjon
 
-Reliabilitet er et viktig begrep innen treningsfysiologi og medisin, da det omhandler påliteligheten av målinger og tester. I forskning og klinisk praksis er det avgjørende at instrumenter og prosedyrer gir stabile resultater over tid, under samme forhold og for ulike individer. Hopkins (2000) definerer reliabilitet som graden av overensstemmelse mellom gjentatte målinger, og understreker at høy reliabilitet er nødvendig for å trekke pålitelige konklusjoner om effekten av trening eller behandling [@Hopkins]. Innen treningsfysiologi kan lav reliabilitet i målingene eksempelvis føre til unøyaktige vurderinger av treningsprogresjon, noe som kan resultere i at treningsprogrammet ikke er tilpasset det faktiske ferdighetsnivået man innehar på gitt tidspunkt. Dette kan føre til manglende fremgang, ettersom treningen ikke er optimalt justert for den enkeltes kapasitet.
+Reliabilitet er et viktig begrep innen treningsfysiologi og medisin, da det omhandler påliteligheten av målinger og tester. I forskning og klinisk praksis er det avgjørende at instrumenter og prosedyrer gir stabile resultater over tid, under samme forhold og for ulike individer. Hopkins (2000) definerer reliabilitet som graden av overensstemmelse mellom gjentatte målinger, og understreker at høy reliabilitet er nødvendig for å trekke pålitelige konklusjoner om effekten av trening eller behandling [@Hopkins]. Innen treningsfysiologi kan lav reliabilitet i målingene føre til unøyaktige vurderinger av treningsprogresjon, noe som kan resultere i at treningsprogrammet ikke er tilpasset det faktiske ferdighetsnivået en innehar på gitt tidspunkt. Dette kan føre til manglende fremgang, ettersom treningen ikke er optimalt justert for den enkeltes kapasitet.
 
 ## Metode
 
-### Gjennomføring av $\dot{V}O_{2max}$ test
+### Gjennomføring av $\dot{V}O_{2max}$-test
 
 Testen som skal gjennomføres er en $\dot{V}O_{2max}$-test, der testdeltakeren starter på en forhåndsbestemt wattverdi (motstand). Denne wattverdien økes gradvis hvert minutt, avhengig av den valgte protokollen, og testdeltakeren sykler til en ikke lenger klarer å fortsette. Testen avsluttes dersom deltakerens tråkkfrekvens synker under 60 rpm (rotasjoner per minutt). Under testen skal deltaker forbli sittende på sykkelen.
 
-Testdeltakeren vil få informasjon om hvor lenge de har syklet underveis i testen. Derimot vil de ikke ha tilgang til annen informasjon som puls, $\dot{V}O_{2}$ eller lignende data underveis. Testlederen vil informere om hvor lang tid det er igjen til neste wattøkning og hvilken watt testdeltakeren sykler på for øyeblikket.
+Testdeltakeren vil få informasjon om hvor lenge de har syklet underveis i testen. Derimot vil de ikke ha tilgang til annen informasjon som puls, VO~2~ eller lignende data underveis. Testlederen vil informere om hvor lang tid det er igjen til neste wattøkning og hvilken watt testdeltakeren sykler på for øyeblikket.
 
 Testlederen vil mot slutten av testen bidra til å pushe testdeltakeren for å få ut det siste av deres kapasitet. Hvordan denne "pushingen" gjennomføres, kan variere mellom testledere, men det er viktig at tilnærmingen til hver deltaker er så konsekvent som mulig. Borg-skalaen (6-20) vil benyttes for å vurdere utmattelsen hos testdeltakeren. Ved testslutt vil deltaker bli bedt om å gi et tall på skalaen, der 6 tilsvarer "ingen anstrengelse" og 20 "maksimal anstrengelse".
 
@@ -27,19 +27,19 @@ Ett minutt etter testslutt tas en laktatprøve fra testdeltakeren for å estimer
 
 Testdeltakeren skal spise sitt siste store måltid senest 2 timer før teststart. Det er tillatt å innta en mindre karbohydratkilde (eks: banan, energibar, gel) senest 30 minutter før teststart. Koffeininntak skal gjøres som normalt og testene gjennomføres på samme tidspunkt på dagen så godt det lar seg gjøre. Deltakeren anbefales å forsøke å opprettholde sin vanlige døgnrytme gjennom testperioden. For å forberede kroppen på testen, er det viktig at deltakerne ikke gjennomfører hard trening på underekstremitetene dagen før testen.
 
-Oppvarmingen før testen ble satt til 5 minutter, hvor deltaker sykler på økende intensitet i intervaller på 2-2-1 minutt. Eksempelvis 2 minutter på 150W, 2 minutter på 175W og 1 minutt på 220W.
+Oppvarmingen før testen ble satt til 5 minutter, der deltaker syklet på økende intensitet i intervaller på 2-2-1 minutt. Eksempelvis 2 minutter på 150W, 2 minutter på 175W og 1 minutt på 220W.
 
-Testprotokollen er den samme for alle tester. Et eksempel på testprotokolle var start på 200W med en økning på 20W hvert minutt til utmattelse. Individuelle tilpasning mtp belastning ble gjort for hver deltaker, både ved oppvarming og testprotokoll.
+Testprotokollen er den samme for alle tester. Et eksempel på testprotokoll var start på 200W med en økning på 20W hvert minutt til utmattelse. Individuelle tilpasning mtp belastning ble gjort for hver deltaker, både ved oppvarming og testprotokoll.
 
 ### Intern validering
 
-Både tekniske og biologiske faktorer kan potensielt påvirke resultatene og true den interne validiteten av testen [@Halperin]. Ved å beskrive og etablere testprosedyre samt standardisere testen, ønsker vi å skape rammer som sikrer at vi kontrollerer for mulige konfunderende faktorer som kan påvirke testprestasjon. Dette vil bidra til å redusere variasjoner og sikre at resultatene reflekterer faktiske prestasjoner, snarere enn påvirkninger fra ytre faktorer.
+Både tekniske og biologiske faktorer kan potensielt påvirke resultatene og true den interne validiteten av testen [@Halperin]. Ved å beskrive og etablere testprosedyrer, samt standardisere testen, ønsker vi å skape rammer som sikrer at vi kontrollerer for mulige konfunderende faktorer som kan påvirke testprestasjon. Dette vil bidra til å redusere variasjoner og sikre at resultatene reflekterer faktiske prestasjoner, snarere enn påvirkninger fra ytre faktorer.
 
-Selv om vi har jobbet for å sikre god intern validitet, er det faktorer som vil kunne påvirke resultatene grunnet individuelle forskjeller i måten å opptre som testleder, bruk av musikk, samt humør og mental status til testdeltager [@Halperin].
-
-\newpage
+Selv om vi har jobbet for å sikre god intern validitet, er det faktorer som vil kunne påvirke resultatene grunnet individuelle forskjeller i måten å opptre som testleder, humør og mental status til testdeltager [@Halperin].
 
 ## Resultater
+
+I denne oppgaven presenteres data for watt~max~. I @fig-w.max observeres watt~max~ for samtlige deltakere ved de ulike testtidspunktene. Det er tydelig at enkelte deltakere hadde betydelige variasjoner i sluttverdiene for watt~max~ mellom testene.
 
 ```{r}
 #| message: false
@@ -58,12 +58,12 @@ df_all <- read_xlsx("data_excel/01_plot_data.xlsx") |>
          rer.max = as.numeric(rer.max))
 ```
 
-```{r, fig.width=6, fig.height=4}
+```{r, fig.width=5, fig.height=4}
 #| warning: false
 #| message: false
 #| echo: false
 #| label: fig-w.max
-#| fig-cap: "Watten testdeltaker holdt de siste 30 sek av testen ved de ulike tidspunktene"
+#| fig-cap: "Watt-verdien testdeltaker holdt de siste 30 sek av VO~2max~-testen ved de ulike tidspunktene"
 
 
 watt_deltaker_plot <- ggplot(data = df_all, 
@@ -77,7 +77,7 @@ watt_deltaker_plot <- ggplot(data = df_all,
   scale_x_discrete(labels = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16")) +
 
   labs(x = "Testdeltakere", 
-       y = "Maks-watt (W)",
+       y = "Watt (W)",
        color = "Tidspunkt") +
   theme_minimal()
 
@@ -85,11 +85,14 @@ watt_deltaker_plot
 ```
 
 
+I @tbl-tidwatt er det beregnet gjennomsnitt og standardavvik ved hvert testtidspunkt. En kan se at den gjennomsnittlige watt~max~-verdien synker fra t1 til t4, og at avviket i testene er større ved t3 og t4, sammenliknet med de to første testene. 
+
+
 ```{r}
 #| warning: false
 #| message: false
 #| echo: false
-#| tbl-cap: "Gj.snitt og st.avvik for watt-maks"
+#| tbl-cap: "Gj.snitt og st.avvik for watt~max~ ved de ulike testtidspunktene"
 #| label: tbl-tidwatt
 
 tab_watt <- df_all |> 
@@ -107,10 +110,13 @@ tab_watt <- df_all |>
               values_from = m_sd) |> 
   gt() |> 
   cols_label(timepoint = "Tidspunkt",
-    w.max = "Watt-maks")
+    w.max = md("Watt~max~"))
 
 tab_watt
 ```
+
+
+Til slutt observerte en watt~max~-verdier ved t1 og t2 og beregnet gjennomsnitt, standardavvik, den typiske feilen (te) og variasjonskoeffisienten (cv%) (@tbl-sumstat). 
 
 
 ```{r}
@@ -118,7 +124,7 @@ tab_watt
 #| message: false
 #| echo: false
 #| tbl-cap: "Summerende statistikk"
-#| label: fig-sumstat
+#| label: tbl-sumstat
 
 dat <- df_all |> 
   #velger de variablene vi ønsker å se på
@@ -148,17 +154,26 @@ tab_sum_stat <- dat |>
     s = "St.avvik",
     te = "Typisk feil",
     cv = "Variasjonskoeffisient") |> 
-  fmt_number(decimals = 2)
+  fmt_number(decimals = 2) |> 
+  tab_footnote(footnote = "Verdier gjelder for test 1 og 2")
 
 tab_sum_stat
 ```
 
-Den gjennomsnittlige watt-verdien som testdeltakerne holdt de siste 30 sekundene av $\dot{V}O_{2max}$-testene var `r mean_and_sd` og den typiske feilen ble målt til `r te`. Variasjonskoeffisienten ble beregnet til `r cv_perc` % (se @fig-sumstat). 
 
 
 ## Diskusjon
 
-Den gjennomsnittlige watt-verdien som testdeltakerne holdt de siste 30 sekundene av $\dot{V}O_{2max}$-testen var `r mean_and_sd` og den typiske feilen ble målt til `r te`. Ifølge Hopkins (2000) er den typisk feilen, den gjennomsnittlige variasjonen ved en test. Den typiske feilen gir en indikasjon på den forventede variasjonen ved en retest [@Hopkins]. I dette tilfellet kan en forvente en variasjon på `r cv_perc` % ved en eventuell re-test.
+Den gjennomsnittlige watt-verdien som testdeltakerne holdt de siste 30 sekundene av $\dot{V}O_{2max}$-testen ved test 1 og 2 var `r mean_and_sd` og den typiske feilen ble målt til `r te`. Ifølge Hopkins (2000) er den typisk feilen, den gjennomsnittlige variasjonen ved en test. Den typiske feilen gir en indikasjon på den forventede variasjonen ved en retest [@Hopkins]. I dette tilfellet kan en forvente en variasjon på `r cv_perc` % ved en eventuell retest. Dette antyder at det er en viss grad av variasjon som kan forventes i målingene, men at resultatene er tilstrekkelig stabile til å trekke pålitelige konklusjoner om deltakerens kapasitet.
 
-Presentere cv. Styrker (utstyr, lærer med mye praktisk erfaring) og svakheter (ulike testledere, protokoll ukjent) 
+Årsaken til at test 1 og test 2 ble sammenlignet, skyldes et betydelig redusert antall deltakere som valgte å gjennomføre test 3 og 4. På grunn av dette ble t1 og t2 ansett som de mest pålitelige og relevante testene å sammenligne i denne studien, da de ga det største og mest representative datagrunnlaget.
 
+Andre potensielle konfunderende faktorer som kan ha påvirket resultatene fra t1 til t4 er deltakerens mentale tilstand, søvnkvalitet, kosthold, samt testlederens tilnærming under gjennomføringen av testen. Disse faktorene kan variere fra test til test og påvirke deltakerens prestasjon, noe som kan forklare deler av variasjonen i testresultatene. For eksempel kan en deltaker som har sovet dårlig og er i dårlig fysisk form, prestere dårligere sammenlignet med en deltaker som er godt uthvilt og mentalt forberedt. Individuelle forskjeller i næringsinntak før testen kan også spille en rolle i testens reliabilitet, da lavt energinivå kan hemme prestasjon under testen.
+
+En typisk feil på 8,9 watt indikerer at standardiseringen av testene var effektiv i å sikre stabile og konsistente resultater. Den systematiske tilnærmingen bidro sannsynligvis til å minimere påvirkningen fra eksterne faktorer, og dermed redusere variasjonen som kunne ha oppstått under testene.
+
+Resultatene fra disse testene gir trolig et pålitelig estimat av deltakerens maksimale kapasitet under de gitte testforholdene, og den relativt lave feilmarginen tyder på at endringer i watt~max~ kan være et nyttig mål for treningsfremgang. Det er dog viktig å huske på at betydelige endringer i resultatene bør undersøkes nærmere, ettersom de kan skyldes reelle forbedringer eller eksterne faktorer som stress eller helsetilstand på testdagen.
+
+## Konklusjon
+
+En kan konkludere med at resultatene fra test 1 og 2 gir et pålitelig estimat av deltakerens maksimale kapasitet, da en typisk feil på 8,9 watt indikerer stabile og konsistente målinger. Standardiseringen av testene har trolig redusert påvirkningen fra eksterne faktorer og den observerte variasjonen i watt~max~ er i dette tilfellet tilstrekkelig lav til at man kan trekke pålitelige konklusjoner om deltakerens fysiske kapasitet. Betydelige endringer i prestasjon bør dog vurderes grundig, da de kan skyldes både reelle fysiske forbedringer og eksterne faktorer som stress, søvnkvalitet og kosthold på testdagen.

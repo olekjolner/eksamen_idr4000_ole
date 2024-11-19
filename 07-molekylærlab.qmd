@@ -1,5 +1,0 @@
----
-title: "RNA ekstraksjon og analyse"
-bibliography: 
-  referanser/07-ref.bib
----

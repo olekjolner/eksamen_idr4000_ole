@@ -2,16 +2,18 @@
 title: "Studiedesign"
 bibliography: 
   referanser/04-ref.bib
+editor_options: 
+  chunk_output_type: console
 ---
 
 
 ## Introduksjon
 
-Studiedesign er en viktig komponent i forskning da det vil være avgjørende for hvordan data samles inn, tolkes og analyseres. Et godt studiedesign vil ofte resultere i mer pålitelige resultater og større grad av reproduserbarhet. Studier som ser seg mer anvendbare i praksis er å foretrekke. [@Zabor2020]
+Studiedesign er en viktig komponent i forskning da det vil være avgjørende for hvordan data samles inn, tolkes og analyseres. Ifølge Zabor et al. (2020) vil et godt studiedesign ofte resultere i mer pålitelige resultater og større grad av reproduserbarhet. Studier som ser seg mer anvendbare i praksis er å foretrekke [@Zabor2020].
 
 Struktur er en viktig komponent når man planlegger en studie. QALMRI-metoden kan bidra til å sikre en ryddig og god struktur. QALMRI adresserer spørsmål som en ønsker svar på, for så å oppgi hvilke tilnærminger som skal benyttes for å besvare spørsmålet. Videre ser man på sammenhengen mellom metodene som benyttes i studien og koblingen til spørsmålet, eller hypotesten, man har stilt i oppgaven. Til slutt presenteres resultatene og man drar konklusjoner til den aktuelle populasjonen. 
 
-I denne oppgaven studeres fem originalartikler som tar for seg effekten av blokkperiodisering på $\dot{V}O_{2max}$ [@Ronnestad2019], [@Breil2010], [@Ronnestad2016], [@Ronnestad2014], [@Ronnestad2014_2]. I oppgaven blir det lagt mest vekt på studiedesignene og de statistiske analysemetodene fra de utvalgte studiene, samt en vurdering av styrker og svakheter knyttet til disse. 
+I denne oppgaven studeres fem originalartikler som tar for seg effekten av blokkperiodisering på $\dot{V}O_{2max}$ [@Ronnestad2019; @Breil2010; @Ronnestad2016; @Ronnestad2014; @Ronnestad2014_2]. I oppgaven blir det lagt mest vekt på studiedesignene og de statistiske analysemetodene fra de utvalgte studiene, samt en vurdering av styrker og svakheter knyttet til disse. 
 
 ## Metode
 
@@ -19,29 +21,52 @@ Alle studiene i oppgaven er randomiserte kontrollerte forsøk (RCT) der man var 
 
 I studiene lå utvalget et sted mellom 16 og 22 personer. I noen studier så en på både kvinner og menn, i andre studier kun menn. Gjengangeren var at utvalget ble definert som godt trente utøvere, eller at de hadde drevet kompetetivt i sin idrett de siste årene.
 
-Det ble gjennomført ulike statistiske analyser i de ulike forsøkene. Noen benyttet ANOVA, mens andre benyttet t-tester, eller en kombinasjon av begge. Flere av studiene benyttet Cohen's d for å beregne effektstørrelse (ES) da dette er en gunstig metode når man vil vurdere effekten av en intervensjon og sammenlinkne to grupper [@Hopkins2009]. I studiene ble resultater presentert som gjennomsnittsøkning i % $\pm$ standardavvik. Resultater ble ansett som statistisk signifikante dersom *p*-verdier $\leq$ 0.05. 
+Det ble gjennomført ulike statistiske analyser i de ulike forsøkene. Noen benyttet ANOVA, mens andre benyttet *t*-tester, eller en kombinasjon av begge. Flere av studiene benyttet Cohen's d for å beregne effektstørrelse (ES) da dette er en gunstig metode når man vil vurdere effekten av en intervensjon og sammenlinkne to grupper [@Hopkins2009]. Med Cohen's d får man standardisert forskjellen mellom gruppene og man kan sammenlikne effekter på tvers av studier hvor det benyttes ulikt design eller ulike måleenheter. Med bruk av Choen's d er det viktig at utvalget er representativt for populasjonen man ønsker å si noe om. 
+
+I studiene ble resultater presentert som gjennomsnittsøkning i % $\pm$ standardavvik. Resultater ble ansett som statistisk signifikante dersom *p*-verdier $\leq$ 0.05. 
 
 ## Resultater
 
-Etter å ha sammenliknet kontrollgruppen med blokkperiodiseringsgruppen post intervensjon, kom samtlige studier frem til at blokkperiodisering gav signinfikant økning i prestasjonsparametere. Endringen kan ses i tabell 1.  
+Etter å ha sammenliknet kontrollgruppen med blokkperiodiseringsgruppen post intervensjon, kom samtlige studier frem til at blokkperiodisering gav signinfikant økning i prestasjonsparametere. Endringene kan ses i @tbl-endringvo2.  
 
-*P*-verdier < 0.05 i samtlige studier. Den gjennomsnittlige effekten blir målt til å ligge en plass mellom 0.76 og 1.34 i 4/5 studier. En av studiene gjorde i tillegg beregninger på kun de mannlige utøverne i sin studie og fant mer signifikante resultater. Denne studien presenterte ingen effektstørrelser.  
+*P*-verdier < 0.05 i samtlige studier. Den gjennomsnittlige effekten ble målt til å ligge en plass mellom 0.76 og 1.34 i 4/5 studier. En av studiene gjorde i tillegg beregninger på kun de mannlige utøverne i sin studie og fant mer signifikante resultater. Denne studien presenterte ingen effektstørrelser.  
 
-|Studie|Relativ endring i $\dot{V}O_{2max}$|*p*-verdier|Effektstørrelse|
-|------|-----------------------------|-----------|---------------|
-|1     |$5.1 \pm 3.3\%$              |  =0.05    | 1.04          |  
-|2     |$5.1 \pm na$                 |  <0.01    | na            |
-|3     |$2.0 \pm 2.5\%$              | <0.05     | 0.76          |
-|4     |$4.6 \pm 3.7\%$ (relative)   | <0.05     | 1.34          |
-|5     |$8.8 \pm 5.9\%$              | <0.05     |1.08           |
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: tbl-endringvo2
+#| tbl-cap: "Endringer i BP-gruppen"
 
-Tabell 1: Alle verdier er fra BP-gruppen. 
+library(tidyverse)
+library(gt)
+
+endring_bp <- data.frame(
+  Studie = 1:5,
+  Relativ_endring_i_VO2max = c("5.1 \u00b1 3.3%", "5.1 \u00b1 na", "2.0 \u00b1 2.5%", "4.6 \u00b1 3.7%", "8.8 \u00b1 5.9%"),
+  p_verdi = c("=0.05", "<0.01", "<0.05", "<0.05", "<0.05"),
+  Effektstorrelse = c(1.04, NA, 0.76, 1.34, 1.08))
+
+endring_bp |> 
+  gt() |> 
+  cols_label(Relativ_endring_i_VO2max = md("Endring VO<sub>2max</sub>"),
+             p_verdi = md("*p*-verdi"), 
+             Effektstorrelse = md("Effektst&oslash;rrelse")) |> 
+  tab_footnote(footnote = md("Endring VO<sub>2max</sub> er gjennomsnitt og standardavvik")) |> 
+  tab_style(cell_text(align = "center"), 
+            locations = cells_body(everything()))
+
+```
+
+
 
 
 ## Diskusjon
 
 
-Styrken ved å benytte RCT som studiedesign er at det minimerer bias og skaper godt sammenlikningsgrunnlag blant liknende intervensjoner. Ved å benytte RCT blir også resultatene mer pålitelige. Ved å benytte objektive data i sine resultater, skapes en anvendbarhet i form av at studiene i større grad er sammenliknbare på tvers av studier og intervensjoner. [@Zabor2020]
+Ifølge Zabor et al. (2020) er styrken ved å benytte RCT som studiedesign at det minimerer bias og skaper godt sammenlikningsgrunnlag blant liknende intervensjoner. Bias innen forskning referer til faktorer ved studien som trekker resultat i en gitt retning. Ved å benytte RCT blir resultatene mer pålitelige. Ved å benytte objektive data i sine resultater skapes en anvendbarhet i form av at studiene i større grad er sammenliknbare på tvers av studier og intervensjoner [@Zabor2020]. KILDE TIL BIAS
+
+I lys av avsnittet over kan en diskutere begrepet konfunding, som refererer til en tredje variabel som påvirker både den avhengige og uavhengige variabelen i studien. I denne studien kan vår avhengige variabel være prestasjonsparametere og den uavhengige variabelen være treningsintervensjonen. Den tredje variabelen (konfunderen) kan i dette tilfellet være søvnkvalitet. Dersom man ikke tar høyde for den tredje variabelen, kan man trekke feilaktige konklusjoner om effekten av treningsintervensjonen. KILDE TIL KONFUNDER
 
 En svakhet ved studiene er de små utvalgene. Dette øker sjansen for å gjøre type II-feil (godtakelse av nullhypotesen, tross at den er falsk). Gjennomsnitt i små utvalg påvirkes i relativt stor grad av verdier som ligger langt unna gjennomsnittet (outliers) [@Mishra2019]. For å objektivt fjerne outliers fra datasettet kan en bestemme seg for grenseverdier man ønsker at sine verdier skal ligge innenfor [@Hopkins2009].  
 
@@ -53,6 +78,7 @@ Målet med studiene var å se hvorvidt mikrosykluser med høyintensiv trening ø
 
 Det at én av studiene ikke presenterte effektstørrelse kan man stille spørmål ved. En av grunnene kan være at små utvalg kan skape store variasjoner i resultater og skape lite pålitelige effekter. Et annet punkt å diskutere er hvorvidt resulatene er av klinisk relevans. Dersom forskerne mener at en effektsørrelsen kan gi et feilaktig inntrykk av resultatenes styrke, kan de la være å presentere effekten. 
 
+
 ## Konklusjon
 
 Blokkperiodisering viser å gi større økning i $\dot{V}O_{2max}$ i samtlige studier, sammenliknet med tradisjonell trening. Langrennsutøvere, ishockeyspillere, alpinister og syklister har alle hatt økning i $\dot{V}O_{2max}$ ved å periodisere hard trening. Godt trente utøvere, som potensielt har stagnert med tradisjonell trening, kan ha god effekt av blokkperiodisering. Funnene vil særlig være relevant for godt trente utøvere, da dette var utvalget som ble sett på i samtlige studier. Dette er dog et snevert utvalg, som trolig har egenskaper som skiller seg fra resten av befolkningen. Derfor vil det være utfordrende å generalisere funn og anbefalinger opp mot den generelle befolkningen. Repetisjon av studiene der utvalget innehar større grad av spredning når det kommer til treningsbakgrunn, kjønn og alder kan derav være av interesse. 
@@ -61,5 +87,3 @@ Alle studiene er randomiserte kontrollerte studier, noe som gir tyngde til grad 
 
 ANOVA (analysis of variance) og *t*-tester ble benyttet slik at man kan sammenlikne flere grupper over ulike tidpunkter i intervensjonen. På den måten kan man få innblikk i hvordan ulik form for trening påvirker prestasjonparametere over tid. Valget av testene bidrar å styrke funnene om at blokkperiodisering gir økning i $\dot{V}O_{2max}$, sammenliknet med tradisjonell trening. 
 
-
-## Referanser

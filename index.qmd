@@ -1,2 +1,4 @@
 # Forord {.unnumbered}
 
+https://github.com/olekjolner/eksamen_idr4000_ole
+
