@@ -8,7 +8,7 @@ book:
   title: "Eksamen: Kvantitativ metode og statistikk (IDR4000)"
   author: "Kandidatnummer: 501"
   date: "2024-11-20"
-  subtitle: "Antall ord: 14303" 
+  subtitle: "Antall ord: 14319" 
   chapters:
     - index.qmd
     - 01-reliabilitet.qmd
