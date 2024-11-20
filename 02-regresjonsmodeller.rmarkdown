@@ -9,6 +9,11 @@ crossref:
   tbl-title: "Tabell"
 ---
 
+
+
+
+
+
 ## Introduksjon Regresjonsmodeller
 
 En regresjonsmodell er ifølge Pisica et al. (2022) en modell som kvantifiserer forholdet mellom en eller flere uavhengige variabler og en avhengig variabel. Innen medisin er regresjon den analysemtoden som er hyppigst anvendt, og det finnes flere forskjellige regresjonsmodeller. De vanligste er lineær regresjon, polynominal regresjon og logistisk regresjon. Valget av regresjonsmodell avhenger av hvilke data som er tilgjengelige [@Pisica].
@@ -40,6 +45,11 @@ For å analysere sammenhengen mellom laktat og watt ble det utført regresjonsan
 ### Resultat
 
 @fig-lacwatt viser sammenhengen mellom wattverdier og laktatnivåer for én deltaker på "pre"-tidspunkt i en sykkelstudien *cyclingstudy*. Laktatnivåene er plottet mot wattverdiene, og flere regresjonslinjer er inkludert for å vise ulike trender i dataene.  
+
+
+
+
+
 
 
 ```{r, fig.width=5, fig.height=3}
@@ -106,6 +116,11 @@ diff4watt <- round(x4lac - 340, 0)
 ```
 
 
+
+
+
+
+
 \newpage
 
 
@@ -137,6 +152,11 @@ Videre har bildet fra elektroforesen blitt analysert ved hjelp av ImageJ/Fiji og
 \newpage
 
 ### Resultat
+
+
+
+
+
 
 ```{r, fig.width=5, fig.height=3}
 #| echo: false
@@ -176,7 +196,17 @@ plot_ladder
   
 ```
 
+
+
+
+
+
 @fig-dnaladder viser sammenhengen mellom logaritmen av molekylvekten og distanse vandret på gel. 
+
+
+
+
+
 
 
 ```{r}
@@ -206,6 +236,11 @@ tbl_pred_molvekt <- dataframe2 |>
 
 tbl_pred_molvekt
 ```
+
+
+
+
+
 
 Av @tbl-molvekt-dist ses estimerte verdier for molekylvekten (bp) etter gitt distanse de har vandret nedover gelen. Testresultatene indikerer at for hver enhet man vandrer nedover gelen vil DNA-fragmentets vekt minke med `r round(abs(coef(cal)[2]), 5)`. der molekylvekten predikeres får vi en modell som estimerer at molekylvekten reduseres med `r round(abs(coef(cal2)[2]), 5)` for hver enhet molekylet vandrer nedover gelen. 
 
@@ -242,6 +277,11 @@ I oppgaven blir det undersøkt hvorvidt treningsalder påvirker nivåer av testo
 Denne studien undersøker biomarkører for muskelhypertrofi for lav (LOW) og høy (HIGH) respondere på motstandstrening. 30 mannlige universitetsstudenter gjennomførte et 6 ukers høyvolum treningsprogram, og ble delt inn i LOW og HIGH grupper basert på endringer i muskelstørrelse og sammensetning. Det ble tatt blodprøver der testosteronenivå i blodet var en av biomarkørene av interesse.
 
 ### Resultat
+
+
+
+
+
 
 
 ```{r, fig.width=5, fig.height=3}
@@ -285,6 +325,11 @@ testo10rounded <- round(testo10, 2)
 
 ```
 
+
+
+
+
+
 Den lineære modellen viser at testosteronnivået reduseres med `r round(abs(coef(m)[2]), 2)` ng\*dl<sup>-1</sup> for hvert år med trening.
 
 ### Diskusjon
@@ -298,3 +343,4 @@ Siden *p*-verdien er høyere enn det tradisjonelle signifikansnivået på 0.05, 
 ### Konklusjon
 
 Analysen av sammenhengen mellom treningsalder og testosteronnivå viser ingen statistisk signifikant effekt. Den negative *t*-verdien antyder en liten nedgang i testosteronnivået med økende treningsalder, men *p*-verdien overstiger signifikansnivået på 0.05, noe som betyr at en ikke kan avvise nullhypotesen. Resultatene indikerer at treningsalder ikke har en betydelig innvirkning på testosteronnivået i blodet og andre faktorer som biologisk alder kan spille en rolle i den observerte nedgangen. Fremtidige studier bør vurdere andre konfunderende variabler for å belyse årsakene til testosteronendringer.
+

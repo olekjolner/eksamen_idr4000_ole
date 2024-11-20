@@ -9,13 +9,13 @@ editor_options:
 
 ## Introduksjon
 
-Reliabilitet er et viktig begrep innen treningsfysiologi og medisin, da det omhandler påliteligheten av målinger og tester. I forskning og klinisk praksis er det avgjørende at instrumenter og prosedyrer gir stabile resultater over tid, under samme forhold og for ulike individer. Hopkins (2000) definerer reliabilitet som graden av overensstemmelse mellom gjentatte målinger, og understreker at høy reliabilitet er nødvendig for å trekke pålitelige konklusjoner om effekten av trening eller behandling [@Hopkins]. Innen treningsfysiologi kan lav reliabilitet i målingene føre til unøyaktige vurderinger av treningsprogresjon, noe som kan resultere i at treningsprogrammet ikke er tilpasset det faktiske ferdighetsnivået en innehar på gitt tidspunkt. Dette kan føre til manglende fremgang, ettersom treningen ikke er optimalt justert for den enkeltes kapasitet.
+Reliabilitet er et viktig begrep innen treningsfysiologi og medisin, da det omhandler påliteligheten av målinger og tester. I forskning og klinisk praksis er det naturligvis avgjørende at utstyr og prosedyrer gir stabile resultater over tid, under samme forhold og for ulike individer. Hopkins (2000) definerer reliabilitet som graden av overensstemmelse mellom gjentatte målinger, og understreker at høy reliabilitet er nødvendig for å trekke pålitelige konklusjoner om effekten av trening eller behandling [@Hopkins]. Innen treningsfysiologi kan lav reliabilitet i målingene føre til unøyaktige vurderinger av treningsprogresjon, noe som kan resultere i at treningsprogrammet ikke er tilpasset det faktiske ferdighetsnivået en innehar på gitt tidspunkt. Dette kan føre til manglende fremgang, ettersom treningen ikke er optimalt justert for den enkeltes kapasitet.
 
 ## Metode
 
 ### Gjennomføring av $\dot{V}O_{2max}$-test
 
-Testen som skal gjennomføres er en $\dot{V}O_{2max}$-test, der testdeltakeren starter på en forhåndsbestemt wattverdi (motstand). Denne wattverdien økes gradvis hvert minutt, avhengig av den valgte protokollen, og testdeltakeren sykler til en ikke lenger klarer å fortsette. Testen avsluttes dersom deltakerens tråkkfrekvens synker under 60 rpm (rotasjoner per minutt). Under testen skal deltaker forbli sittende på sykkelen.
+Testen som skal gjennomføres er en $\dot{V}O_{2max}$-test, der testdeltakeren starter på en forhåndsbestemt wattverdi (motstand). Denne wattverdien økes gradvis hvert minutt, avhengig av den valgte protokollen, og testdeltakeren sykler til han/hun ikke lenger klarer å fortsette. Testen avsluttes dersom deltakerens tråkkfrekvens synker under 60 rpm (rotasjoner per minutt). Under testen skal deltaker forbli sittende på sykkelen.
 
 Testdeltakeren vil få informasjon om hvor lenge de har syklet underveis i testen. Derimot vil de ikke ha tilgang til annen informasjon som puls, VO~2~ eller lignende data underveis. Testlederen vil informere om hvor lang tid det er igjen til neste wattøkning og hvilken watt testdeltakeren sykler på for øyeblikket.
 
@@ -39,7 +39,7 @@ Selv om vi har jobbet for å sikre god intern validitet, er det faktorer som vil
 
 ## Resultater
 
-I denne oppgaven presenteres data for watt~max~. I @fig-w.max observeres watt~max~ for samtlige deltakere ved de ulike testtidspunktene. Det er tydelig at enkelte deltakere hadde betydelige variasjoner i sluttverdiene for watt~max~ mellom testene.
+I denne oppgaven presenteres data for watt~max~ (den wattmostanden deltakeren oppretthold siste 30 sek av testen). I @fig-w.max observeres watt~max~ for samtlige deltakere ved de ulike testtidspunktene. Det er tydelig at enkelte deltakere hadde betydelige variasjoner i sluttverdiene for watt~max~ mellom testene.
 
 ```{r}
 #| message: false
@@ -85,7 +85,7 @@ watt_deltaker_plot
 ```
 
 
-I @tbl-tidwatt er det beregnet gjennomsnitt og standardavvik ved hvert testtidspunkt. En kan se at den gjennomsnittlige watt~max~-verdien synker fra t1 til t4, og at avviket i testene er større ved t3 og t4, sammenliknet med de to første testene. 
+I @tbl-tidwatt er det beregnet gjennomsnitt og standardavvik ved hvert testtidspunkt. En kan se at den gjennomsnittlige watt~max~-verdien synker fra t1 til t4, og at avviket i testene er større ved t3 og t4, sammenliknet med t1 og t2. 
 
 
 ```{r}
@@ -116,7 +116,7 @@ tab_watt
 ```
 
 
-Til slutt observerte en watt~max~-verdier ved t1 og t2 og beregnet gjennomsnitt, standardavvik, den typiske feilen (te) og variasjonskoeffisienten (cv%) (@tbl-sumstat). 
+Til slutt ble watt~max~-verdier ved t1 og t2 sammenliknet. Det ble beregnet gjennomsnitt, standardavvik, den typiske feilen (te) og variasjonskoeffisienten (cv%) (@tbl-sumstat). 
 
 
 ```{r}

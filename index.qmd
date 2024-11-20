@@ -2,3 +2,29 @@
 
 https://github.com/olekjolner/eksamen_idr4000_ole
 
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Last inn nødvendige pakker
+library(stringr)
+
+# Funksjon for å telle ord i en enkelt fil
+word_count <- function(file_paths) {
+  # Les inn filen
+  text <- readLines(file_paths, encoding = "UTF-8")
+  
+  # Splitte teksten på mellomrom og telle ord
+  word_count <- sum(sapply(strsplit(text, "\\s+"), length))
+  return(word_count)
+}
+
+# Filene du vil lese inn
+file_paths <- c("01-reliabilitet.qmd", "02-regresjonsmodeller.qmd", "03-statistisk-inferens.qmd", "04-studiedesign.qmd", "05-repeterte-maalinger.qmd", "06-vitenskapsfilosofi.qmd", "07-mol-lab.qmd")
+
+# Beregn ordtellingen for de spesifikke filene
+total_word_count <- sum(sapply(file_paths, word_count))
+```
+

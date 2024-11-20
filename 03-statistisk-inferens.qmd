@@ -10,7 +10,7 @@ editor_options:
 
 Ifølge Cremers et al. (2017) er statistisk inferens en type statistikk som omhandler metoder for å trekke konklusjoner om en populasjon basert på et utvalg. Målet er å generalisere funnene fra utvalget og bruke det til å si noe om hele populasjonen [@Cremers].
 
-En viktig del av statistisk inferens er å vurdere usikkerheten i estimatene, typisk ved hjelp av konfidensintervaller og p-verdier [@Cremers]. Videre skriver Cremers et al. (2017) at effektstørrelser gir en kvantitativ vurdering av hvor betydelig en observert effekt er, og at effekten ikke er avhengig av utvalgsstørrelse. Dette er nyttig i forskning, da det hjelper med å forstå de praktiske betydningene av funnene man har gjort gjennom sammenlikning av grupper med forskjellige utvalgsstørrelser. Ved å kombinere statistisk inferens med effektstørrelser kan man bedre vurdere resultatene sine og sette det i en bred kontekst [@Cremers]. 
+En viktig del av statistisk inferens er å vurdere usikkerheten i estimatene, typisk ved hjelp av konfidensintervaller og p-verdier [@Cremers]. Videre skriver Cremers et al. (2017) at effektstørrelser gir en kvantitativ vurdering av hvor betydelig en observert effekt er, og at denne effekten ikke er avhengig av utvalgsstørrelse. Dette er nyttig i forskning, da det hjelper med å forstå de praktiske betydningene av funnene man har gjort gjennom sammenlikning av grupper med forskjellige utvalgsstørrelser. Ved å kombinere statistisk inferens med effektstørrelser kan man bedre vurdere resultatene sine og sette det i en bred kontekst [@Cremers]. 
 
 I første del av oppgaven defineres statistiske begrep og uttrykk. Deretter simuleres to utvalg på henholdsvis 8 stk og 40 stk. Det er ønskelig å undersøke hvordan utvalgsstørrelse påvirker estimater og resultater av statistiske analyser. Det blir simulert 1000 studier med de to utvalgene og gjort statistiske bergeninger basert på dette. 
 Det er vedlagt kode for gjennomføring av simuleringer bakerst i kapittelet.  
@@ -140,7 +140,7 @@ gjelder for utvalget med n = 40 der standardavviket for snittet av utvalget er `
 
 ## Effekten av utvalgsstørrelse for statistisk styrke
 
-Det simuleres først to utvalg fra en populasjon med gjennomsnitt på 1.5 og standardavvik på 3. 
+Det simuleres først to utvalg fra en populasjon med gjennomsnitt på 1.5 og standardavvik på 3. Utvalgsstørrelsen er på henholdsvis 8 og 40 stk. 
 
 ```{r}
 #| echo: false
@@ -185,13 +185,12 @@ histo_pvals
 ```
 
 
-```{r, fig.width=5, fig.height=3}
+```{r, fig.width=4, fig.height=3}
 #| echo: false
 #| warning: false
 #| message: false
 #| label: fig-spredning
 #| fig-cap: "Spredning i verdier for n = 8 og n = 40"
-
 
 # plotter samp 1 og 2 for å illustrere den relative spredningen i utvalget
  
@@ -244,6 +243,8 @@ p8pros <- round((pwr_8$power*100), 0)
 p40pros <- round((pwr_40$power*100), 0)
 ```
 
+\newpage
+
 Som en nå har observert, ligger forskjellen mellom utvalg 1 og 2 altså først og fremst i størrelsen på utvalgene. Med et større utvalg ser en typisk lavere standardfeil (SE) og *p*-verdier, samt høyere *t*-verdier. Et større utvalg minimerer også risikoen for å gjøre type II-feil, altså at man ikke forkaster nullhypotesen når den er faktisk er falsk. Dette skyldes at større utvalg gir mindre variabilitet og dermed lavere usikkerhet sammenlignet med mindre utvalg. Utvalgsstørrelse påvirker dog ikke risikoen for å gjøre type I-feil, da dette bestemmes av signifikansnivået som settes (typisk $\alpha$ < 0.05). 
 
 I @fig-pvals oberveres en jevnere fordeling av simulerte *p*-verdier i utvalget n = 8, sammenliknet med n = 40. Dette er et resultat av at den tilfeldige variasjonen blir større i små utvalg (@fig-spredning). Større utvalg gjør testen mer følsom for små effekter, noe som ofte resulterer i lavere *p*-verdier. Dette gjør det lettere å forkaste nullhypotesen. 
@@ -253,9 +254,6 @@ Ved å plotte *p*-verdiene for 1000 simuleringer fremheves også tendensen til f
 Statistisk styrke (power) refererer til sannsynligheten for å korrekt avvise nullhypotesen, og ved å sammenligne antall observasjoner under signifikansnivået vil en få en indikasjon på styrken i testene. Den statistiske styrken for utvalg n = 8 blir beregnet til `r p8pros` %, mens for n = 40 blir den beregnet til `r p40pros` %. Effektstørrelsen er i dette tilfellet satt til 0.5. Ifølge Cohens'd er den forventede effekten liten ved 0.2, moderat ved 0.5 og stor ved 0.8 [@Lakens]. 
 
 Den beregnede statistiske styrken for n = 8 på `r p8pros` % indikerer lav sannsynlighet for å oppdage en reell effekt, dersom den er tilstede. Det vil altså være større sjans for å gjøre en type II-feil med det lille utvalget. For n = 40 var styrken `r p40pros` %, som betyr at sjansen for å oppdage en reell effekt er stor dersom den eksisterer. Dette baseres på den lave usikkerheten i estimatene som følger med et større utvalg. 
-
-
-\newpage
 
 
 ```{r}

@@ -22,19 +22,22 @@ data("dxadata")
 data("strengthvolume")
 ```
 
+
+
 ## Introduksjon
 
-I dagens samfunn er det i stor grad enighet om at styrketrening er viktig for god helse. Befolkningen trender mot en mindre aktiv livsstil, samtidig som man blir eldre og eldre. Etter fylte 50 år, viser studier at man taper et sted mellom 5 og 10 % muskelmasse årlig, som tilsvarer \~ 0.4 kg [@Westcott2012]. Tilstander som aldersrelatert muskeltap, diabetes type II, hjertesykdom, redusert beinmasse og økende grad av fettmasse ses hyppigere og hyppigere. Ved sykdom ser en høy grad av inaktivitet som igjen leder til tap av muskelmasse, redusert metabolsk respons, økt fettmasse og andre liknende tilstander. Aerob aktivitet er for tiden veldig populært blir i stor grad anbefalt for å motvirke utvikling av disse tilstandene, men hva gjelder så styrketrening? [@Westcott2012]
+Styrketrening kan defineres som trening med mål om å bli sterkere, forebygge skader, fremme prestasjon eller trening med mål om å øke muskelmasse [@Stone]. Noen definerer volum som den viktigste faktoren for å se endringer på cellenivå, mens andre mener at høyintesiv trening kan gi samme effekten [@De_Santana]. Radaelli et al. (2024) ser at lavintensiv trening også kan ha god effekt for å øke muskelmasse og styrke i underekstremiteter blant eldre individer ($\geq$ 60 år) [@Radaelli]. Antall sett og repetisjoner, samt ytelsesvekt, benyttes for definere *volumet* av trening, mens *intensiteten* på treningen ofte defineres som en prosentandel av én maksimal repetisjon (1RM) [@De_Santana]. For mange er tidsklemma en problem i hverdagen og flere er trolig interessert i å vite hvor lite trening som skal til for å oppnå ønsket stimuli av treningen man gjennomfører [@Choi2017]. 
 
-Styrketrening kan defineres som trening med mål om å bli sterkere, forebygge skader, fremme prestasjon eller trening med mål om å øke muskelmasse [@Stone]. Noen definerer volum som den viktigste faktoren for å se endringen på cellenivå, mens andre mener at høyintesiv trening kan gi samme effekten [@De_Santana]. Radaelli et al. (2024) ser at lavintensiv trening også kan ha god effekt for å øke muskelmasse og styrke i underekstremiteter blant eldre individer ($\geq$ 60 år) [@Radaelli]. Antall sett, antall repetisjoner og motstanden det trenes på benyttes for definere *volumet* av trening, mens *intensiteten* på treningen ofte defineres som en prosentandel av én maksimal repetisjon (1RM). For mange er tidsklemma en problem i hverdagen og flere er trolig interessert i å vite hvor lite trening som skal til for å oppnå ønsket stimuli av treningen man gjennomfører. [@De_Santana]
+Befolkningen trender mot en mindre aktiv livsstil, samtidig som man blir eldre og eldre. Etter fylte 50 år, viser studier at man taper et sted mellom 5 og 10 % muskelmasse årlig [@Westcott2012], som tilsvarer \~ 0.4 kg. Aldersrelatert muskeltap, ofte forverret av sykdom, fører til økt inaktivitet, som igjen bidrar til ytterligere tap av muskelmasse [@Westcott2012].
 
-I denne studien er det ønskelig å se nærmere på hvorvidt volumet av styrketrening er av betydning for økning av muskelmasse og muskelstyrke.
+I denne studien er det ønskelig å undersøke hvorvidt volumet av styrketrening er av betydning for økning av muskelmasse og muskelstyrke ved hjelp av gjentatte målinger. 
 
 ## Metode
 
 ### Utvalg og studieoversikt
 
 I studien ble det rekruttert 41 individer, menn (n = 19) og kvinner (n = 22). For å bli inkludert i studien måtte man kunne få lokal anestesi, ikke ha trent mer enn én styrkeøkt i uken siste året, ikke ha nedsatt eller påvirket muskelstyrke grunnet tidligere eller nåværende skade og ikke innta medisin som kan påvirke treningsadaptasjon. Etter gjennomført treningsintervensjon ble 7 deltakere ekskludert fra dataanalysen da de ikke oppfylte kravene om gjennomføring av intervensjon. @tbl-deltakere viser en oversikt over antall kvinner og menn som er inkludert i analysering av data og deres respektive gjennomsnittlige karakteristikker. Deltakere som ble inkludert i analysen hadde alle tidligere erfaring med idrett.
+
 
 ```{r}
 #| echo: false
@@ -183,7 +186,7 @@ ancova.results_4 <- paste0(est_4, " g",
                             uci_4, 
                             "], *p*-value = ", 
                             pval_4, 
-                            ", t<sub>", 
+                            ", *t*<sub>", 
                             df_4, "</sub> = ", 
                             tval_4, ")")
 
@@ -234,16 +237,15 @@ lean.mass.results <- paste0(estimate, " g",
                             ciu, 
                             "], *p*-value = ", 
                             pval, 
-                            ", t<sub>", 
+                            ", *t*<sub>", 
                             df, "</sub> = ", 
                             tval, ")")
 ```
 
-Etter den 12 uker lange styrketreningsintervensjonen er den prosentvise økningen i mager muskelmasse for benet som trente tre sett `r perc_change[1, 2]`% og for det som trente ett sett `r perc_change[2, 2]`%. Den gjennomsnittlige forskjellen i mager muskelmasse i beina mellom de to treningsvolumene (ett sett vs. tre sett) var `r lean.mass.results`.
+Etter den 12 uker lange styrketreningsintervensjonen var den prosentvise økningen i mager muskelmasse for benet som trente tre sett `r perc_change[1, 2]` % og for det som trente ett sett `r perc_change[2, 2]` %. Den gjennomsnittlige endringen i mager muskelmasse i beina mellom de to treningsvolumene (ett og tre sett) var `r ancova.results_4`.
 
-Benytter man en blandet modell som tar man høyde for hver deltaker sine pre-verdier, og ser på hvordan antall sett påvirker mager muskelmasse etter treningsintervensjonen, blir den gjennomsnittlige endringen i mager muskelmasse mellom ett og tre sett `r ancova.results_4`.
 
-@fig-muskelmasse viser endringen i mager muskelmasse målt i gram for de ulike deltakerenes bein. Linjen som er trukket mellom punkt viser hver deltakers resultat og gir et inntrykk av forskjellen mellom effekten av treningsvolum på muskelmasse. Tre sett virker av figuren å ha større effekt for å øke muskelmasse, sammenliknet med lavere treningsvolum.
+@fig-muskelmasse viser endringen i mager muskelmasse målt i gram for de ulike deltakerenes bein. Linjen som er trukket mellom punkt viser den enkelte deltakers resultat og gir et inntrykk av effekten av treningsvolum på muskelmasse. Tre sett virker av figuren å ha større effekt for å øke muskelmasse, sammenliknet med lavere treningsvolum.
 
 ```{r}
 #| echo: false
@@ -266,7 +268,7 @@ plot_change <- lm_change_dat |>
   geom_line() +
   geom_point(size = 2) +
   labs(x = "Sett", 
-       y = "\U0394Muskelmasse (g)", 
+       y = bquote(Delta~Muskelmasse ~"(g)"), 
        color = "Kj&oslash;nn") +
   scale_color_manual(values = c("male" = "steelblue", "female" = "orange"),
                      labels = c("male" = "Mann", "female" = "Kvinne")) +
@@ -275,6 +277,7 @@ plot_change <- lm_change_dat |>
 plot_change
 
 ```
+
 
 ### Treningsvolums effekt på kraftutvikling i underekstremitetene
 
@@ -334,7 +337,7 @@ strength.results <- paste0(estimate2, " kg",
                             ciu2, 
                             "], *p*-value = ", 
                             pval2, 
-                            ", t<sub>", 
+                            ", *t*<sub>", 
                             df2, "</sub> = ", 
                             tval2, ")")
 
@@ -382,7 +385,7 @@ ancova.results_5 <- paste0(est_5, " kg",
                             uci_5, 
                             "], *p*-value = ", 
                             pval_5, 
-                            ", t<sub>", 
+                            ", *t*<sub>", 
                             df_5, "</sub> = ", 
                             tval_5, ")")
 
@@ -409,9 +412,7 @@ perc_change2 <- strengthvolume |>
 
 ```
 
-Den gjennomsnittlige prosentvise økningen i ytelsesvekt ved 1RM (målt i kg) for henholdsvis tre og ett sett var `r round(perc_change2[2, 4], 2)` og `r round(perc_change2[1, 4], 2)`. Den gjennomsnittlige forskjellen i ytelsesvekt mellom beina ved de ulike treningsvolumene (ett sett vs. tre sett) var `r strength.results`.
-
-Benytter man en blandet modell der man tar høyde for hver deltaker sine pre-verdier, og ser hvordan antall sett påvirker ytelsesvekt etter treningsintervensjonen, blir den gjennomsnittlige endringen i ytelsesvekt mellom ett og tre sett `r ancova.results_5`.
+Den gjennomsnittlige prosentvise økningen i ytelsesvekt ved 1RM (målt i kg) for henholdsvis tre og ett sett var `r round(perc_change2[2, 4], 2)` % og `r round(perc_change2[1, 4], 2)` %. Den gjennomsnittlige forskjellen i ytelsesvekt mellom beina ved de ulike treningsvolumene (ett sett vs. tre sett) var `r ancova.results_5`.
 
 @fig-styrke viser endringen i den maksimale ytelsesvekten deltakerne evnet å presse ved 1RM for henholdsvis de som trente ett og tre sett. Av figuren ser man en tendens til at høyere treningsvolum gir større evne til å yte mer på øvelsen beinpress.
 
@@ -434,7 +435,7 @@ plot_change2 <- str_change_dat |>
   geom_line() +
   geom_point(size = 2) +
   labs(x = "Sett", 
-       y = "\U0394 Ytelsesvekt (kg)", 
+       y = bquote(Delta~Ytelsesvekt ~ "(kg)"), 
        color = "Kj&oslash;nn") + 
   scale_color_manual(values = c("male" = "steelblue", "female" = "orange"),
                      labels = c("male" = "Mann", "female" = "Kvinne")) +
@@ -444,22 +445,25 @@ plot_change2
 
 ```
 
+
+
 ## Diskusjon
 
-I tråd med tidligere forskning, som har undersøkt effekten av treningsvolum på muskelmasse og styrke [@Stone], [@De_Santana], viser denne studien at høyere volum (tre sett) har en tendens til å føre til større muskelvekst og styrkeøkning enn lavere volum (ett sett). Dette styrker ideen om at volum kan være en viktig faktor for å oppnå optimal muskelhypertrofi og styrkeutvikling.
+I tråd med tidligere forskning, som har undersøkt effekten av treningsvolum på muskelmasse og styrke [@Stone; @De_Santana], viser denne studien at høyere volum (tre sett) har en tendens til å føre til større muskelvekst og styrkeøkning enn lavere volum (ett sett). Dette styrker ideen om at volum kan være en viktig faktor for å oppnå optimal muskelhypertrofi og styrkeutvikling.
 
 I en større kontekst, spesielt i forhold til aldersrelatert muskeltap, er det viktig å påpeke at forskning viser at personer over 50 år mister 5–10 % av muskelmassen årlig [@Westcott2012]. Studien antyder at styrketrening kan være et effektivt tiltak for å motvirke eller bremse dette tapet av muskelmasse. Dette er særlig relevant for eldre voksne, og andre individer, som er lite aktive eller har begynt å trene styrke for første gang.
 
-Studien er dog gjennomført på yngre individer, som tidligere har drevet med idrett (se @tbl-deltakere). Det kan av den grunn være misvisende å trekke paralleller til en populasjon med andre forutsetninger. På en annen side hadde deltakerne i studien trent lite til ingen styrke det siste året. Av den grunn kan en anta at treningseffekten en ser vil være tilstede for andre individer med tilsvarende treningsbakgrunn, uavhengig av alder.
+Studien er dog gjennomført på yngre individer, som tidligere har drevet med idrett. Det kan av den grunn være misvisende å trekke paralleller til en populasjon med andre forutsetninger. Deltakerne i studien hadde dog trent lite eller ikke i det hele tatt det siste året. Derfor kan en anta at de treningseffektene som observeres, også vil være til stede hos andre individer med en tilsvarende treningsbakgrunn, uavhengig av alder.
 
 I denne studien med unge utøvere så en frafall underveis i intervensjonen. En kan anta at dette skyldes at treningsmengden blir for høy i forhold til hva kroppen er vant til, noe som kan føre til skader eller andre utfordringer. Dersom en står ovenfor ulike helseutfordringer, kan det være utfordrende å utføre flere sett per øvelse, og derfor kan den praktiske anvendelsen av tre sett være utfordrende. I lys av dette kan det være relevant å vurdere om ett sett også gir tilstrekkelig stimuli for muskelforbedring i populasjoner med begrensede ressurser.
 
-Intensiteten (70–90 % 1RM) brukt i denne studien er i tråd med anbefalingene for både muskelstyrke og hypertrofi [@De_Santana]. Imidlertid kunne det vært interessant å undersøke om lavere intensitet på treningen kombinert med høyere volum kunne ha hatt en like god effekt på muskelmasseøkning for denne gruppen.
+Intensiteten (70–90 % 1RM) brukt i denne studien er i tråd med anbefalingene for både muskelstyrke og hypertrofi [@De_Santana]. Imidlertid kunne det vært interessant å undersøke om lavere intensitet på treningen kombinert med enda høyere volum kunne ha hatt en like god effekt på muskelmasseøkning for dette utvalget.
 
-En langtidsoppfølging av deltakerne etter at treningsintervensjonen er avsluttet, kan gi mer informasjon om hvordan treningsvolum påvirker vedlikehold av muskelmasse og styrke i lengden. Hvordan deltakerne vedlikeholder gevinster over tid kan være viktig for å vurdere praktisk anvendbarhet av treningsvolumet som en strategi for å bevare helsen.
+En langtidsoppfølging av deltakerne etter at treningsintervensjonen er avsluttet, kan gi mer informasjon om hvordan treningsvolum påvirker vedlikehold av muskelmasse og styrke i det lange løp. Hvordan deltakerne vedlikeholder effekter over tid kan være viktig for å vurdere praktisk anvendbarhet av treningsvolumet som en strategi for å bevare helsen.
 
-Ved å benytte en blandet modell (ANCOVA) i tillegg til t-test får man en modell som tar hensyn til individuell variasjon. Modellen tar høyde for at hver deltaker har ulike pre-verdier og at de responderer ulikt gjennom intervensjonen. Ved å gi hver deltaker sin egen startverdi, kan man mer presist vurdere og isolere effekten av treningsintervensjonen (ett sett vs tre sett).
+Ved å benytte en blandet modell (ANCOVA) får man en modell som tar hensyn til individuell variasjon. Modellen tar høyde for at hver deltaker har ulike pre-verdier og at de responderer ulikt gjennom intervensjonen. Ved å gi hver deltaker sin egen startverdi, kan man mer presist vurdere og isolere effekten av treningsintervensjonen (ett sett vs tre sett), samtidig som man kontrollerer for potensielle konfoundere som kan påvirke resultatene.
 
 ## Konklusjon
 
-Treningsvolum og intensitet virker å være viktige parametre for å øke muskelmasse og muskelstyrke. Tre sett med styrkeøvelser synes å gi en større tilpasning enn kun ett sett med øvelser. De langsiktige effektene av denne treningsmodellen bør undersøkes nærmere, i tillegg til om de samme effektene av treningsvolum kan observeres i andre deler av befolkningen.
+Treningsvolum og intensitet virker å være viktige parametre for å øke muskelmasse og muskelstyrke. Tre sett med styrkeøvelser synes å gi en større tilpasning enn kun ett sett med øvelser. De langsiktige effektene av denne treningsmodellen bør utforskes videre, samt om de samme effektene av treningsvolum kan observeres i andre deler av befolkningen.
+

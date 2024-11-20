@@ -1,19 +1,21 @@
+
 project: 
   render: 
     - "*.qmd"
     - "!devel/"
   type: book
 book:
-  title: "Eksamen IDR4000"
-  author: "Kandidatnummer 501"
-  date: "2024-11-22"
+  title: "Eksamen: Kvantitativ metode og statistikk (IDR4000)"
+  author: "Kandidatnummer: 501"
+  date: "2024-11-20"
+  subtitle: "Antall ord: 14303" 
   chapters:
     - index.qmd
     - 01-reliabilitet.qmd
     - 02-regresjonsmodeller.qmd
     - 03-statistisk-inferens.qmd
     - 04-studiedesign.qmd
-    - 05-repeterte-målinger.qmd
+    - 05-repeterte-maalinger.qmd
     - 06-vitenskapsfilosofi.qmd
     - 07-mol-lab.qmd
     - Referanser.qmd
@@ -34,5 +36,3 @@ format:
 crossref:
   fig-title: "Figur"
   tbl-title: "Tabell"
-header-includes:
-  - \usepackage{longtable}
