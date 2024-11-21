@@ -17,8 +17,7 @@ En lineær regresjonsmodell er en modell der en kan estimere verdien av en avhen
 
 y~i~ = b~0~ + b~1~x~i~ + e~i~
 
-der y~i~ er den avhengige variabelen, x~i~ er den uavhengige variabelen, b~0~ er skjæringspunktet til grafen og b~1~ stigningstallet til grafen. e~i~ representerer feilen (residualen) for observasjonen *i*. 
-
+der y~i~ er den avhengige variabelen, x~i~ er den uavhengige variabelen, b~0~ er skjæringspunktet til grafen og b~1~ stigningstallet til grafen. e~i~ representerer feilen (residualen) for observasjonen *i*.
 
 I denne rapporten vil ulike tema bli presentert. Det være seg *laktatterskel*, *estimering av størrelse på DNA-fragment* og *estimering av testosteronnivåer i blodet*. De ulike temaene presenteres med egne delkapitler. Sammenhengen mellom oppgavene er at de omhandler bruken av regresjon og hvordan vi kan tolke denne typen dataanalyse.
 
@@ -32,15 +31,13 @@ I denne delen undersøkes forholdet mellom laktatnivå og watt, samt tilpasninge
 
 ### Metode
 
-I denne analysen ble det hentet data fra *cyclingstudy*-datasettet som en finner i pakken *exscidata* i R. Fra datasettet ble deltaker 10 benyttet som eksempel. Datasettet ble omstrukturert til et mer passende format (tidy data) for deretter å lage et hensiktsmessig plot for å illustrere relasjonen mellom laktat og watt. Det ble utført ulike regresjonsmodeller for å fremstille forholdet mellom laktat og watt (se @fig-lacwatt). Laktatverdiene og wattverdiene ble plottet som gule punkter i grafen. Deretter ble en stiplet svart linje tegnet for å forbinde punktene. En ønsket å se på wattverdier ved henholdsvis 2 og 4 mmol x L<sup>-1</sup> laktat. Derfor ble de lagt til hjelpende horisontale (rød og lilla) og vertikale (stiplede svarte) linjer for å synliggjøre skjæringspunkter på grafen.
+I denne analysen ble det hentet data fra *cyclingstudy*-datasettet som en finner i pakken *exscidata* i R. Fra datasettet ble deltaker 10 benyttet som eksempel. Datasettet ble omstrukturert til et mer passende format (tidy data) for deretter å lage et hensiktsmessig plot for å illustrere relasjonen mellom laktat og watt. Det ble utført ulike regresjonsmodeller for å fremstille forholdet mellom laktat og watt (se @fig-lacwatt). Laktatverdiene og wattverdiene ble plottet som gule punkter i grafen. Deretter ble en stiplet svart linje tegnet for å forbinde punktene. En ønsket å se på wattverdier ved henholdsvis 2 og 4 $mmol \times L^{-1}$ laktat. Derfor ble de lagt til hjelpende horisontale (rød og lilla) og vertikale (stiplede svarte) linjer for å synliggjøre skjæringspunkter på grafen.
 
 For å analysere sammenhengen mellom laktat og watt ble det utført regresjonsanalyser ved hjelp av tre forskjellige modeller: først en lineær modell (blå linje), deretter en andregrads-modell (grønn linje) og til slutt en tredjegrads-modell (rosa linje). Formålet med analysen var å vurdere hvilken av de tre modellene som best predikerer forholdet mellom laktat og watt.
 
-
 ### Resultat
 
-@fig-lacwatt viser sammenhengen mellom wattverdier og laktatnivåer for én deltaker på "pre"-tidspunkt i en sykkelstudien *cyclingstudy*. Laktatnivåene er plottet mot wattverdiene, og flere regresjonslinjer er inkludert for å vise ulike trender i dataene.  
-
+@fig-lacwatt viser sammenhengen mellom wattverdier og laktatnivåer for én deltaker på "pre"-tidspunkt i en sykkelstudien *cyclingstudy*. Laktatnivåene er plottet mot wattverdiene, og flere regresjonslinjer er inkludert for å vise ulike trender i dataene.
 
 ```{r, fig.width=5, fig.height=3}
 #| message: false
@@ -105,13 +102,11 @@ diff4watt <- round(x4lac - 340, 0)
 
 ```
 
-
 \newpage
-
 
 ### Diskusjon
 
-Den lineære regresjonsmodellen estimerer wattverdier for henholdsvis 2 og 4 mmol x L<sup>-1</sup> intensitet til å være `r round(x2lac, 0)` W og `r round(x4lac, 0)` W. De reelle wattverdiene for henholdsvis 2 og 4 mmol x L<sup>-1</sup> er tilnærmet 310 og 340 W. Dette gir et avvik på `r diff2watt` W og `r diff4watt` W, som indikerer at den lineære modellen ikke er spesielt anvendbar i dette tilfellet. Avviket kan tyde på at forholdet mellom laktat og watt ikke er lineært, og at en lineær modell ikke fanger opp den reelle kurven i dataene. Dette var som forventet.  
+Den lineære regresjonsmodellen estimerer wattverdier for henholdsvis 2 og 4 $mmol \times L^{-1}$ intensitet til å være `r round(x2lac, 0)` W og `r round(x4lac, 0)` W. De reelle wattverdiene for henholdsvis 2 og 4 $mmol \times L^{-1}$ er tilnærmet 310 og 340 W. Dette gir et avvik på `r diff2watt` W og `r diff4watt` W, som indikerer at den lineære modellen ikke er spesielt anvendbar i dette tilfellet. Avviket kan tyde på at forholdet mellom laktat og watt ikke er lineært, og at en lineær modell ikke fanger opp den reelle kurven i dataene. Dette var som forventet.
 
 Som vist i @fig-lacwatt, gir andregrads- og tredjegradsmodellen en betydelig bedre tilpasning til dataene. Begge disse modellene viser seg å gi betydelig bedre estimat på de faktiske målingene. Dette tyder på at en mer kompleks modell gir mer nøyaktige estimater av wattverdier ved forskjellige laktatnivåer.
 
@@ -119,20 +114,19 @@ Som vist i @fig-lacwatt, gir andregrads- og tredjegradsmodellen en betydelig bed
 
 Derfor kan man konkludere med at den lineære modellen har begrensninger i denne sammenhengen, og at andregrads- og tredjegradsmodellen er mer presis for å beskrive forholdet mellom laktat og watt.
 
-
 \newpage
 
 ## Estimering av størrelse på DNA-fragmenter
 
 ### Introduksjon
 
-Beregning av størrelse på DNA-fragmenter er en viktig prosess i lab for å kunne identifisere og analysere DNA-prøver. Gelelektroforese er en av metodene som en hyppigst anvendt for dette formålet. DNA-prøvene tilsettes da en agrosegel og separeres etter størrelse ved hjelp at elektrisistet. Store fragment beveger seg langsommere enn små fragment og en vil få en spredning på gelen. Ved å benytte en kjent referansemarkører, kan man estimere størrelsen på DNA-fragmentene [@Schadock]. 
+Ifølge Schadock et al. (2015) er beregning av størrelse på DNA-fragmenter en viktig prosess i lab for å kunne identifisere og analysere DNA-prøver. Gelelektroforese er en av metodene som en hyppigst anvendt for dette formålet. DNA-prøvene tilsettes da en agrosegel og separeres etter størrelse ved hjelp at elektrisistet. Store fragment beveger seg langsommere enn små fragment og en vil få en spredning på gelen. Ved å benytte en kjent referansemarkører, kan man estimere størrelsen på DNA-fragmentene [@Schadock].
 
 ### Metode
 
-Først ble det tatt helblod fra en forsøksperson, og DNA ble ekstrahert ved hjelp av en standard protokoll for blod-DNA-isolering. Ekstraheringen involverte flere trinn, blant dem tilsetning av bufferløsninger og enzymatiske behandlinger for å bryte ned cellemembraner og frigjøre DNA-et. Det ble videre kjørt en elektroforese for å kunne separere DNA-fragmentene og bestemme lengden på DNA-fragmentene i basepar. Når elektroforesen var ferdig, ble det tatt et bilde av agarosegel 2%. 
+Først ble det tatt helblod fra en forsøksperson, og DNA ble ekstrahert ved hjelp av en standard protokoll for blod-DNA-isolering. Ekstraheringen involverte flere trinn, blant dem tilsetning av bufferløsninger og enzymatiske behandlinger for å bryte ned cellemembraner og frigjøre DNA-et. Det ble videre kjørt en elektroforese for å kunne separere DNA-fragmentene og bestemme lengden på DNA-fragmentene i basepar. Når elektroforesen var ferdig, ble det tatt et bilde av agarosegel 2%.
 
-Videre har bildet fra elektroforesen blitt analysert ved hjelp av ImageJ/Fiji og dataanalyser ble gjennomført i R. Logaritmen av molekylvekten ble plottet mot vandret distanse på gel for å estimere størrelse av DNA-fragment med høyere presisjon. 
+Videre har bildet fra elektroforesen blitt analysert ved hjelp av ImageJ/Fiji og dataanalyser ble gjennomført i R. Logaritmen av molekylvekten ble plottet mot vandret distanse på gel for å estimere størrelse av DNA-fragment med høyere presisjon.
 
 \newpage
 
@@ -176,7 +170,6 @@ plot_ladder
   
 ```
 
-@fig-dnaladder viser sammenhengen mellom logaritmen av molekylvekten og distanse vandret på gel. 
 
 
 ```{r}
@@ -207,35 +200,31 @@ tbl_pred_molvekt <- dataframe2 |>
 tbl_pred_molvekt
 ```
 
-Av @tbl-molvekt-dist ses estimerte verdier for molekylvekten (bp) etter gitt distanse de har vandret nedover gelen. Testresultatene indikerer at for hver enhet man vandrer nedover gelen vil DNA-fragmentets vekt minke med `r round(abs(coef(cal)[2]), 5)`. der molekylvekten predikeres får vi en modell som estimerer at molekylvekten reduseres med `r round(abs(coef(cal2)[2]), 5)` for hver enhet molekylet vandrer nedover gelen. 
-
+Av @tbl-molvekt-dist ses estimerte verdier for molekylvekten (bp) etter gitt distanse de har vandret nedover gelen. I @fig-dnaladder er tabellen plottet. Testresultatene indikerer at for hver enhet man vandrer nedover gelen vil DNA-fragmentets vekt minke med `r round(abs(coef(cal)[2]), 5)`. Der molekylvekten predikeres får vi en modell som estimerer at molekylvekten reduseres med `r round(abs(coef(cal2)[2]), 5)` for hver enhet molekylet vandrer nedover gelen.
 
 \newpage
 
 ### Diskusjon
 
-I oppgaven er det benyttet en kalibreringskurve for å estimere størrelsen av ukjente DNA-fragmenter. Det ble først benyttet en kjent DNA-stige for å etablere en modell mellom logaritmen av molekylvekten og den distansen DNA-fragmentene vandret på gel. Modellen ble så benyttet til å estimere de størrelsen på de ukjente DNA-fragmentene. Resultatene viser at mindre DNA-fragmenter vandrer lenger distanse på gelen, sammenliknet med større fragmenter, altså slik som forventet. 
+I oppgaven er det benyttet en kalibreringskurve for å estimere størrelsen av ukjente DNA-fragmenter. Det ble først benyttet en kjent DNA-stige for å etablere en modell mellom logaritmen av molekylvekten og den distansen DNA-fragmentene vandret på gel. Modellen ble så benyttet til å estimere de størrelsen på de ukjente DNA-fragmentene. Resultatene viser at mindre DNA-fragmenter vandrer lenger distanse på gelen, sammenliknet med større fragmenter, altså slik som forventet.
 
-Molekylvekten av DNA-fragmentene følger en ikke-lineær skala, noe som gjør det vanskelig å analysere direkte forholdet mellom størrelse og vandret distanse. Derfor er det gunstig å benytte logaritmen av molekylvekten i regresjonsmodellen. Denne omgjøringen gir en lineær sammenheng, som er lettere å analysere og gir mer presise estimater av DNA-fragmentenes størrelse. Ved å bruke logaritmen forbedres kalibreringskurvens nøyaktighet, noe som igjen øker presisjonen i prediksjonene.
+Molekylvekten av DNA-fragmentene følger en ikke-lineær skala, noe som gjør det vanskelig å analysere direkte forholdet mellom størrelse og vandret distanse. Derfor er det gunstig å benytte logaritmen av molekylvekten i regresjonsmodellen [@LogTrans]. Denne omgjøringen gir en lineær sammenheng, som er lettere å analysere og gir mer presise estimater av DNA-fragmentenes størrelse. Ved å bruke logaritmen forbedres kalibreringskurvens nøyaktighet, noe som igjen øker presisjonen i prediksjonene [@LogTrans].
 
 Prediksjonenes presisjon avhenger av flere faktorer. Blant dem kvaliteten på agarosegelen og målenøyaktighet av vandret distanse. Gelen ble laget manuelt, noe som kan føre til ujevnheter i konsistens og skape ulike forhold for molekyelene som vandrer i gelen.
 
 Selv om bildeprogrammet Fiji er et mye brukt verktøy for bildeanalyse, kan det være flere faktorer som kan påvirke nøyaktigheten av målingene. En mulig feilkilde kan være relatert til oppløsningen på bildene som ble tatt av agarosegelen. Redusert bildeoppløsning kan ha ført til unøyaktige målinger av distansen som DNA-fragmentene vandret under elektroforesen.
 
-
 ### Konklusjon
 
 I denne oppgaven ble en kalibreringskurve brukt for å estimere størrelsen på ukjente DNA-fragmenter. Logaritmen av molekylvekten ble benyttet i regresjonsmodellen for å oppnå en mer lineær sammenheng, noe som økte presisjonen i estimeringen av DNA-fragmentenes størrelse. Resultatene viste at mindre fragmenter vandret lengre på agarosegelen enn større fragmenter. Presisjonen i prediksjonene påvirkes imidlertid av flere faktorer, som kvaliteten på agarosegelen og nøyaktigheten i målingen av vandret distanse. Feilkilder som ujevn gelkonsistens og lav bildeoppløsning kan ha påvirket resultatene. Fremtidige studier bør fokusere på å standardisere gel-forberedelsen og forbedre bildeoppløsningen, slik at feilene reduseres og nøyaktigheten i målinger økes.
-
-
 
 ## Estimering av testosteronnivå i blodet
 
 ### Introduksjon
 
-Haun et al. (2019) ønsket å undersøke hvorfor mennesker reponderer forskjellig på styrketrening. Ulike biomarkører ble studert for å forsøke å finne ut av hva som er årsak til den ulike responsen mellom personer som responderer godt på styrketrening, kontra de som ikke responderer så godt [@Haun2019]. En av markørene som ble observert var testosteron. 
+Haun et al. (2019) ønsket å undersøke hvorfor mennesker reponderer forskjellig på styrketrening. Ulike biomarkører ble studert for å forsøke å finne ut av hva som er årsak til den ulike responsen mellom personer som responderer godt på styrketrening, kontra de som ikke responderer så godt [@Haun2019]. En av markørene som ble observert var testosteron.
 
-I oppgaven blir det undersøkt hvorvidt treningsalder påvirker nivåer av testosteron i blodet. En regresjonsmodell blir tilpasset dataen og tolket deretter. 
+I oppgaven blir det undersøkt hvorvidt treningsalder påvirker nivåer av testosteron i blodet. En regresjonsmodell blir tilpasset dataen og tolket deretter.
 
 ### Metode
 
@@ -243,12 +232,11 @@ Denne studien undersøker biomarkører for muskelhypertrofi for lav (LOW) og hø
 
 ### Resultat
 
-
 ```{r, fig.width=5, fig.height=3}
 #| echo: false
 #| warning: false
 #| message: false
-#| fig-cap: "Figur 3: Sammenheng mellom treningsalder og testosteronverdier i blodet"
+#| fig-cap: "Sammenheng mellom treningsalder og testosteronverdier i blodet"
 #| label: "tolkning av regresjonsmodell"
 
 library(exscidata)
@@ -285,13 +273,13 @@ testo10rounded <- round(testo10, 2)
 
 ```
 
-Den lineære modellen viser at testosteronnivået reduseres med `r round(abs(coef(m)[2]), 2)` ng\*dl<sup>-1</sup> for hvert år med trening.
+Den lineære modellen viser at testosteronnivået reduseres med `r round(abs(coef(m)[2]), 2)` $ng \times dl^{-1}$ for hvert år med trening.
 
 ### Diskusjon
 
-Fra datasettet hypertrophy valgte vi å se på sammenhengen mellom testosteronkonsentrasjon i blodet (ng **×** dl<sup>-1</sup>) og treningsalder (antall år med trening). Den lineære modellen forteller at testosteronkonsentrasjonen i blodet synker med `r round(abs(coef(m)[2]), 2)` ng **×** dl<sup>-1</sup> for hvert treningsår.
+Fra datasettet hypertrophy valgte vi å se på sammenhengen mellom testosteronkonsentrasjon i blodet ($ng \times dl^{-1}$) og treningsalder (antall år med trening). Den lineære modellen forteller at testosteronkonsentrasjonen i blodet synker med `r round(abs(coef(m)[2]), 2)` $ng \times dl^{-1}$ for hvert treningsår.
 
-Analysen av dataene viser en *t*-verdi på `r tval` og en *p*-verdi lik `r pval`, noe som indikerer at det ikke er statistisk signifikant bevis for en sammenheng mellom treningsalder og nivået av testosteron i blodet. Den negative *t*-verdien indikerer at tetsosteronnivå synker i tråd med økende treningsalder. Det kan diskuteres hvorvidt den negative nedgangen i testosteronverdier faktisk skyldes treningsalder, eller en annen konfunder som ikke er tatt hensyn til i dette tilfellet, eksempelvis økende biologisk alder. 
+Analysen av dataene viser en *t*-verdi på `r tval` og en *p*-verdi lik `r pval`, noe som indikerer at det ikke er statistisk signifikant bevis for en sammenheng mellom treningsalder og nivået av testosteron i blodet. Den negative *t*-verdien indikerer at tetsosteronnivå synker i tråd med økende treningsalder. Det kan diskuteres hvorvidt den negative nedgangen i testosteronverdier faktisk skyldes treningsalder, eller en annen konfunder som ikke er tatt hensyn til i dette tilfellet, eksempelvis økende biologisk alder.
 
 Siden *p*-verdien er høyere enn det tradisjonelle signifikansnivået på 0.05, kan vi ikke avvise nullhypotesen, som antyder at det ikke er noen betydelig effekt eller sammenheng mellom de to variablene i dette datasettet. Dette betyr at variasjonen i testosteronnivåer ikke ser ut til å være relatert til hvor lenge individene har trent.
 
